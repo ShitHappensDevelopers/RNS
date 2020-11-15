@@ -21,6 +21,12 @@
   <ItemGroup>
     <ClCompile Include="RNS.c" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="filter.txt" />
+    <Text Include="signal.txt" />
+    <Text Include="filter_test.txt" />
+    <Text Include="signal_test.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{49A080B3-F171-4BA0-B31F-5411D741924D}</ProjectGuid>
