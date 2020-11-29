@@ -21,6 +21,32 @@ typedef uint32_t rns_t;
 #define S2 16
 #define S3 24
 
+#define Modules_count 4
+int Modules[4] = { B0, B1, B2, B3 };
+
+
+
+
+void reverse(rns_t* numbers, int numbers_length) {
+	for (int i = 0; i < numbers_length / 2; i++)
+	{
+		rns_t result_i = numbers[i];
+		numbers[i] = numbers[numbers_length - i - 1];
+		numbers[numbers_length - i - 1] = result_i;
+	}
+}
+
+//void reverse(int* numbers, int numbers_length) {
+//	for (int i = 0; i < numbers_length / 2; i++)
+//	{
+//		int result_i = numbers[i];
+//		numbers[i] = numbers[numbers_length - i - 1];
+//		numbers[numbers_length - i - 1] = result_i;
+//	}
+//}
+
+
+
 void print_rns_number(rns_t n) {
 	uint16_t n0, n1, n2, n3;
 	n0 = (n & M0) >> S0;
@@ -99,6 +125,134 @@ rns_t inverse_rns_number(rns_t y) {
 rns_t sub_rns_numbers(rns_t x, rns_t y) {
 	rns_t iy = inverse_rns_number(y);
 	return add_rns_numbers(x, iy);
+}
+
+rns_t sum_array_numbers(rns_t* numbers, int numbers_length) {
+	rns_t sum = 0;
+	for (int i = 0; i < numbers_length; i++)
+	{
+		sum = add_rns_numbers(sum, numbers[i]);
+	}
+	return sum;
+}
+
+bool equal(rns_t x, rns_t y) {
+	for (int i = 0; i < 4; i++)
+	{
+		if (get_rns_number_part(x, i) != get_rns_number_part(y, i))
+			return false;
+	}
+	return true;
+}
+
+rns_t div_rns_numbers(rns_t a, rns_t b) {
+	if (equal(a, b))
+		return int_to_rns(1);
+	
+	rns_t X[32] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	rns_t U[32] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	rns_t x = int_to_rns(1);
+
+	rns_t two = int_to_rns(2);
+	int counter_X = 0;
+	while (compare(a, mul_rns_numbers(x, b)) >= 0)
+	{
+		X[counter_X] = x;
+		x = mul_rns_numbers(two, x);
+		counter_X++;
+	}
+
+	reverse(X, counter_X);
+
+	int counter_U = 0;
+	for (int i = 0; i < counter_X; i++)
+	{
+		rns_t mul_result = mul_rns_numbers(add_rns_numbers(sum_array_numbers(U, counter_U), X[i]), b);
+		if (compare(mul_result, a) <= 0) {
+			U[counter_U] = X[i];
+			counter_U++;
+		}
+	}
+
+	return sum_array_numbers(U, counter_U);
+}
+
+int negative(int a, int base) {
+	int b = base, x = 1, y = 0, n = 0, a_temp = 0, x_temp = 0;
+	while (a != 0) {
+		n = b / a;
+		a_temp = b - n * a;
+		b = a;
+		a = a_temp;
+		x_temp = y - n * x;
+		y = x;
+		x = x_temp;
+	}
+	return y % base;
+}
+
+void to_associated_mixed_radix_system(int* vector, int vector_length, int* result, int result_length, int modules_offset) {
+	modules_offset = modules_offset + 1;
+	if (vector_length > 0) {
+		int a1 = vector[0];
+		result[result_length] = a1;
+
+		int Ai[Modules_count];
+		for (int i = 0; i < vector_length - 1; i++)
+		{
+			Ai[i] = vector[i + 1] - a1;
+		}
+
+		int Mn[Modules_count];
+		for (int i = modules_offset; i < Modules_count; i++)
+		{
+			Mn[i - modules_offset] = negative(Modules[modules_offset - 1], Modules[i]);
+		}
+
+		int Aj[Modules_count];
+		for (int i = 0; i < vector_length - 1; i++)
+		{
+			Aj[i] = ((Ai[i] * Mn[i]) % Modules[i + modules_offset] + Modules[i + modules_offset]) % Modules[i + modules_offset];
+		}
+
+		to_associated_mixed_radix_system(Aj, vector_length - 1, result, result_length + 1, modules_offset);
+	}
+	else {
+		for (int i = 0; i < result_length / 2; i++)
+		{
+			int result_i = result[i];
+			result[i] = result[result_length - i-1];
+			result[result_length - i - 1] = result_i;
+		}
+	}
+}
+
+int compare(rns_t a, rns_t b) {
+	if (equal(a, b))
+		return 0;
+
+	int vectorA[Modules_count];
+	int vectorB[Modules_count];
+	int resultA[Modules_count];
+	int resultB[Modules_count];
+	for (int i = 0; i < Modules_count; i++)
+	{
+		vectorA[i] = get_rns_number_part(a, i);
+		vectorB[i] = get_rns_number_part(b, i);
+		resultA[i] = 0;
+		resultB[i] = 0;
+	}
+
+	to_associated_mixed_radix_system(vectorA, Modules_count, resultA, 0, 0);
+	to_associated_mixed_radix_system(vectorB, Modules_count, resultB, 0, 0);
+
+	for (int i = 0; i < Modules_count; i++)
+	{
+		if (resultA[i] > resultB[i])
+			return 1;
+		if (resultA[i] < resultB[i])
+			return -1;
+	}
 }
 
 
@@ -297,6 +451,10 @@ bool check_arrays_equal(uint32_t count, uint32_t* arr1, uint32_t* arr2) {
 	return true;
 }
 
+
+
+
+
 main()
 {
 	//printf("Hello World!\n");
@@ -311,8 +469,8 @@ main()
 	//printf("%" PRIu32 "\n", result);
 
 
-
-	uint32_t filter_count = 0;
+	// filter implementation
+	/*uint32_t filter_count = 0;
 	uint32_t* filter = read_file("filter.txt", &filter_count);
 	rns_t* filter_rns = int_to_rns_arrays(filter_count, filter);
 	print_numbers(filter_count, filter);
@@ -330,5 +488,24 @@ main()
 
 	bool are_equal = check_arrays_equal(signal_count, result_signal, result_signal_rns_converted);
 	if (are_equal)
-		printf("ARE EQUAL!!!");
+		printf("ARE EQUAL!!!");*/
+
+
+
+	uint32_t a = 0;
+	uint32_t b = 2;
+	rns_t a1 = int_to_rns(a);
+	rns_t b1 = int_to_rns(b);
+	int compare_result = compare(a1, b1);
+	printf("compare_result: %d\n", compare_result);
+
+
+	uint32_t a2 = 987654321;
+	uint32_t b2 = 123456;
+	rns_t a3 = int_to_rns(a2);
+	rns_t b3 = int_to_rns(b2);
+	rns_t div_result_rns = div_rns_numbers(a3, b3);
+	int div_result = rns_to_int(div_result_rns);
+	printf("div_result: %d", div_result);
+
 }
