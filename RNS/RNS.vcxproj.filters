@@ -18,6 +18,12 @@
     <ClCompile Include="RNS.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rns_fp_t.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rns_t.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="filter.txt" />

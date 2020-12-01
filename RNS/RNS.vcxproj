@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RNS.c" />
+    <ClCompile Include="rns_fp_t.c" />
+    <ClCompile Include="rns_t.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="filter.txt" />

@@ -1,8 +1,13 @@
 #include <stdint.h>
-#include<stdio.h>
+#include <stdio.h>
 #include <inttypes.h>
-#include <stdint.h>
 #include <stdbool.h>
+#include <math.h>
+
+
+
+
+
 
 typedef uint32_t rns_t;
 
@@ -21,13 +26,17 @@ typedef uint32_t rns_t;
 #define S2 16
 #define S3 24
 
+#define A0 3021585941u
+#define A1 1099363434u
+#define A2 1663315003u
+#define A3 952860257u
+
 #define Modules_count 4
 int Modules[4] = { B0, B1, B2, B3 };
 
+rns_t Zero_rns = 0;
 
-
-
-void reverse(rns_t* numbers, int numbers_length) {
+void reverse_rns(rns_t* numbers, int numbers_length) {
 	for (int i = 0; i < numbers_length / 2; i++)
 	{
 		rns_t result_i = numbers[i];
@@ -36,24 +45,16 @@ void reverse(rns_t* numbers, int numbers_length) {
 	}
 }
 
-//void reverse(int* numbers, int numbers_length) {
-//	for (int i = 0; i < numbers_length / 2; i++)
-//	{
-//		int result_i = numbers[i];
-//		numbers[i] = numbers[numbers_length - i - 1];
-//		numbers[numbers_length - i - 1] = result_i;
-//	}
-//}
-
-
-
-void print_rns_number(rns_t n) {
-	uint16_t n0, n1, n2, n3;
-	n0 = (n & M0) >> S0;
-	n1 = (n & M1) >> S1;
-	n2 = (n & M2) >> S2;
-	n3 = (n & M3) >> S3;
-	printf("%02x %02x %02x %02x", n0, n1, n2, n3);
+uint16_t get_rns_number_part(rns_t num, uint8_t base) {
+	uint16_t ans = 0;
+	switch (base) {
+	case 0: ans = (uint16_t)((num & M0) >> S0); break;
+	case 1: ans = (uint16_t)((num & M1) >> S1); break;
+	case 2: ans = (uint16_t)((num & M2) >> S2); break;
+	case 3: ans = (uint16_t)((num & M3) >> S3); break;
+	default: break;
+	}
+	return ans;
 }
 
 rns_t int_to_rns(uint32_t n) {
@@ -73,6 +74,23 @@ rns_t* int_to_rns_arrays(uint32_t count, uint32_t* numbers) {
 	return result;
 }
 
+uint32_t rns_to_int(rns_t n) {
+	uint64_t ans;
+	ans = (uint64_t)A0 * (uint64_t)get_rns_number_part(n, 0) +
+		(uint64_t)A1 * (uint64_t)get_rns_number_part(n, 1) +
+		(uint64_t)A2 * (uint64_t)get_rns_number_part(n, 2) +
+		(uint64_t)A3 * (uint64_t)get_rns_number_part(n, 3);
+	return (uint32_t)(ans % (rns_maxint() + 1u));
+}
+
+uint32_t* rns_to_int_arrays(uint32_t count, rns_t* numbers) {
+	uint32_t* result = (uint32_t*)malloc(sizeof(uint32_t) * count);
+	for (int i = 0; i < count; i++) {
+		result[i] = rns_to_int(numbers[i]);
+	}
+	return result;
+}
+
 void set_rns_number_part(rns_t* num, uint16_t val, uint8_t base) {
 	switch (base) {
 	case 0: *num |= (uint32_t)val << S0; break;
@@ -81,18 +99,6 @@ void set_rns_number_part(rns_t* num, uint16_t val, uint8_t base) {
 	case 3: *num |= (uint32_t)val << S3; break;
 	default: break;
 	}
-}
-
-uint16_t get_rns_number_part(rns_t num, uint8_t base) {
-	uint16_t ans = 0;
-	switch (base) {
-	case 0: ans = (uint16_t)((num & M0) >> S0); break;
-	case 1: ans = (uint16_t)((num & M1) >> S1); break;
-	case 2: ans = (uint16_t)((num & M2) >> S2); break;
-	case 3: ans = (uint16_t)((num & M3) >> S3); break;
-	default: break;
-	}
-	return ans;
 }
 
 rns_t add_rns_numbers(rns_t x, rns_t y) {
@@ -110,6 +116,7 @@ rns_t mul_rns_numbers(rns_t x, rns_t y) {
 	set_rns_number_part(&ans, (get_rns_number_part(x, 1) * get_rns_number_part(y, 1)) % B1, 1);
 	set_rns_number_part(&ans, (get_rns_number_part(x, 2) * get_rns_number_part(y, 2)) % B2, 2);
 	set_rns_number_part(&ans, (get_rns_number_part(x, 3) * get_rns_number_part(y, 3)) % B3, 3);
+
 	return ans;
 }
 
@@ -127,7 +134,7 @@ rns_t sub_rns_numbers(rns_t x, rns_t y) {
 	return add_rns_numbers(x, iy);
 }
 
-rns_t sum_array_numbers(rns_t* numbers, int numbers_length) {
+rns_t sum_array_numbers_rns(rns_t* numbers, int numbers_length) {
 	rns_t sum = 0;
 	for (int i = 0; i < numbers_length; i++)
 	{
@@ -136,7 +143,7 @@ rns_t sum_array_numbers(rns_t* numbers, int numbers_length) {
 	return sum;
 }
 
-bool equal(rns_t x, rns_t y) {
+bool equal_rns(rns_t x, rns_t y) {
 	for (int i = 0; i < 4; i++)
 	{
 		if (get_rns_number_part(x, i) != get_rns_number_part(y, i))
@@ -146,9 +153,9 @@ bool equal(rns_t x, rns_t y) {
 }
 
 rns_t div_rns_numbers(rns_t a, rns_t b) {
-	if (equal(a, b))
+	if (equal_rns(a, b))
 		return int_to_rns(1);
-	
+
 	rns_t X[32] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	rns_t U[32] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	rns_t x = int_to_rns(1);
@@ -162,19 +169,19 @@ rns_t div_rns_numbers(rns_t a, rns_t b) {
 		counter_X++;
 	}
 
-	reverse(X, counter_X);
+	reverse_rns(X, counter_X);
 
 	int counter_U = 0;
 	for (int i = 0; i < counter_X; i++)
 	{
-		rns_t mul_result = mul_rns_numbers(add_rns_numbers(sum_array_numbers(U, counter_U), X[i]), b);
+		rns_t mul_result = mul_rns_numbers(add_rns_numbers(sum_array_numbers_rns(U, counter_U), X[i]), b);
 		if (compare(mul_result, a) <= 0) {
 			U[counter_U] = X[i];
 			counter_U++;
 		}
 	}
 
-	return sum_array_numbers(U, counter_U);
+	return sum_array_numbers_rns(U, counter_U);
 }
 
 int negative(int a, int base) {
@@ -221,14 +228,14 @@ void to_associated_mixed_radix_system(int* vector, int vector_length, int* resul
 		for (int i = 0; i < result_length / 2; i++)
 		{
 			int result_i = result[i];
-			result[i] = result[result_length - i-1];
+			result[i] = result[result_length - i - 1];
 			result[result_length - i - 1] = result_i;
 		}
 	}
 }
 
 int compare(rns_t a, rns_t b) {
-	if (equal(a, b))
+	if (equal_rns(a, b))
 		return 0;
 
 	int vectorA[Modules_count];
@@ -255,126 +262,200 @@ int compare(rns_t a, rns_t b) {
 	}
 }
 
+rns_t sqrt_rns(rns_t number) {
+	rns_t result = number;
+	rns_t xk = number;
 
+	if (compare(number, Zero_rns) <= 0)
+		return Zero_rns;
 
+	rns_t two = int_to_rns(2);
+	while (true) {
+		xk = add_rns_numbers(div_rns_numbers(number, xk), xk);
+		xk = div_rns_numbers(xk, two);
 
-#define A0 3021585941u
-#define A1 1099363434u
-#define A2 1663315003u
-#define A3 952860257u
-
-uint32_t rns_to_int(rns_t n) {
-	uint64_t ans;
-	ans = (uint64_t)A0 * (uint64_t)get_rns_number_part(n, 0) +
-		(uint64_t)A1 * (uint64_t)get_rns_number_part(n, 1) +
-		(uint64_t)A2 * (uint64_t)get_rns_number_part(n, 2) +
-		(uint64_t)A3 * (uint64_t)get_rns_number_part(n, 3);
-	return (uint32_t)(ans % (rns_maxint() + 1u));
-}
-
-uint32_t* rns_to_int_arrays(uint32_t count, rns_t* numbers) {
-	uint32_t* result = (uint32_t*)malloc(sizeof(uint32_t) * count);
-	for (int i = 0; i < count; i++) {
-		result[i] = rns_to_int(numbers[i]);
+		if (compare(result, xk) > 0)
+			result = xk;
+		else
+			return result;
 	}
-	return result;
 }
 
 uint32_t rns_maxint() {
 	return B0 * B1 * B2 * B3 - 1;
 }
 
+//int ex(int x, int eps)
+//{
+//	int ret = 1, t = 1, f = 1;
+//	int k;
+//	for (int n = 1; t > eps; n++)
+//	{
+//		t = pow(x, n) / f;
+//		ret += t;
+//		f = k = n + 1;
+//		while (k > 1)
+//			f *= --k;
+//	}
+//	return ret;
+//}
 
 
 
 
 
-typedef uint64_t rbr_t;
 
-rbr_t to_rbr(int32_t n) {
-	rbr_t ans = 0;
-	uint8_t i, s = 0;
-	if (n < 0) {
-		s = 1;
-		n = abs(n);
 
+
+
+
+
+
+
+typedef struct {
+	rns_t x;
+	rns_t divider;
+} rns_fp_t;
+
+//1000 in rns
+rns_t Default_fixed_point_divider_rns = 4146342980u;
+int Default_fixed_point_divider = 1000;
+rns_fp_t Zero_rns_fp = { 0, 4146342980u };
+
+rns_fp_t int_to_rns_fp(uint32_t n) {
+	rns_fp_t result = { int_to_rns(n), int_to_rns(1) };
+	return result;
+}
+
+rns_fp_t* int_to_rns_fp_arrays(uint32_t count, uint32_t* numbers) {
+	rns_fp_t* result = (rns_fp_t*)malloc(sizeof(rns_fp_t) * count);
+	for (int i = 0; i < count; i++) {
+		result[i] = int_to_rns_fp(numbers[i]);
 	}
-	for (i = 0; i < 32; i++) {
-		ans += ((n & 1) ? 3 : 1) * (1llu << (2 * i));
-		n >>= 1;
+	return result;
+}
+
+uint32_t rns_fp_to_int(rns_fp_t n) {
+	return rns_to_int(div_rns_numbers(n.x, n.divider));
+}
+
+uint32_t* rns_fp_to_int_arrays(uint32_t count, rns_fp_t* numbers) {
+	uint32_t* result = (uint32_t*)malloc(sizeof(uint32_t) * count);
+	for (int i = 0; i < count; i++) {
+		result[i] = rns_fp_to_int(numbers[i]);
 	}
-	return (s) ? ~ans : ans;
+	return result;
 }
 
-int8_t rbr_digit(uint8_t b) {
-	switch (b) {
-	case 0: return -1;
-	case 1: return 0;
-	case 2: return 0;
-	case 3: return 1;
+double rns_fp_to_double(rns_fp_t n) {
+	return (double)rns_to_int(n.x) / rns_to_int(n.divider);
+}
+
+rns_fp_t double_to_rns_fp(double n) {
+	return (rns_fp_t) { int_to_rns(n * Default_fixed_point_divider), Default_fixed_point_divider_rns };
+}
+
+void set_rns_fp_number_part(rns_fp_t* num, uint8_t val, uint8_t base) {
+	set_rns_number_part(&(num->x), val, base);
+}
+
+void set_rns_fp_divider(rns_fp_t* num, int divider) {
+	num->divider = divider;
+}
+
+uint8_t get_rns_fp_number_part(rns_fp_t num, uint8_t base) {
+	return get_rns_number_part(num.x, base);
+}
+
+rns_fp_t add_rns_fp_numbers(rns_fp_t a, rns_fp_t b) {
+	if (a.divider != b.divider) {
+		exit(0);
+	}
+	rns_t ans = add_rns_numbers(a.x, b.x);
+	return (rns_fp_t) { ans, a.divider };
+}
+
+rns_fp_t mul_rns_fp_numbers(rns_fp_t a, rns_fp_t b) {
+	if (a.divider != b.divider) {
+		exit(0);
+	}
+	rns_t ans = mul_rns_numbers(a.x, b.x);
+	ans = div_rns_numbers(ans, a.divider);
+	return (rns_fp_t) { ans, a.divider };
+}
+
+rns_fp_t inverse_rns_fp_number(rns_fp_t a) {
+	return (rns_fp_t) { inverse_rns_number(a.x), a.divider };
+}
+
+rns_fp_t sub_rns_fp_numbers(rns_fp_t x, rns_fp_t y) {
+	rns_fp_t iy = inverse_rns_fp_number(y);
+	return add_rns_fp_numbers(x, iy);
+}
+
+rns_fp_t sum_array_numbers_rns_fp(rns_fp_t* numbers, int numbers_length) {
+	rns_fp_t sum = Zero_rns_fp;
+	for (int i = 0; i < numbers_length; i++)
+	{
+		sum = add_rns_fp_numbers(sum, numbers[i]);
+	}
+	return sum;
+}
+
+bool equal_rns_fp(rns_fp_t x, rns_fp_t y) {
+	for (int i = 0; i < 4; i++)
+	{
+		if (get_rns_fp_number_part(x, i) != get_rns_fp_number_part(y, i))
+			return false;
+	}
+	return true;
+}
+
+rns_fp_t div_rns_fp_numbers(rns_fp_t a, rns_fp_t b) {
+	if (a.divider != b.divider) {
+		exit(0);
+	}
+	rns_t a_rns = mul_rns_numbers(a.x, a.divider);
+	return (rns_fp_t) { div_rns_numbers(a_rns, b.x), a.divider };
+}
+
+int compare_rns_fp(rns_fp_t a, rns_fp_t b) {
+	if (a.divider != b.divider) {
+		exit(0);
+	}
+	return compare(a.x, b.x);
+}
+
+rns_fp_t sqrt_rns_fp(rns_fp_t number) {
+	rns_fp_t result = number;
+	rns_fp_t xk = number;
+
+	if (compare_rns_fp(number, Zero_rns_fp) <= 0)
+		return Zero_rns_fp;
+
+	rns_fp_t two = int_to_rns_fp(2);
+	while (true) {
+		xk = add_rns_fp_numbers(div_rns_fp_numbers(number, xk), xk);
+		xk = div_rns_fp_numbers(xk, two);
+
+		if (compare_rns_fp(result, xk) > 0)
+			result = xk;
+		else
+			return result;
 	}
 }
 
-int32_t rbr_to_int(rbr_t n) {
-	int64_t ans = 0;
-	uint8_t i;
-	for (i = 0; i < 32; i++) {
-		ans += rbr_digit(n & 3) * (1 << i);
-		n >>= 2;
-	}
-	return (int32_t)ans;
-}
 
-int8_t rbr_enc(int8_t s) {
-	switch (s) {
-	case -1: return 0;
-	case 0: return 1;
-	case 1: return 3;
-	}
-}
 
-int8_t rbr_add_partial(rbr_t s, rbr_t t) {
-	int8_t z = rbr_digit(s & 3) + rbr_digit(t & 3);
-	return rbr_enc(z);
-}
 
-int8_t rbr_add_st(rbr_t x, rbr_t y, int8_t* s, int8_t* t) {
-	int8_t dx = rbr_digit(x & 3);
-	int8_t dy = rbr_digit(y & 3);
-	if ((dx == -1) && (dy == -1)) { *t = -1; *s = 0; }
-	if ((dx == -1) && (dy == 0)) { *t = -1; *s = 1; }
-	if ((dx == 0) && (dy == -1)) { *t = 0; *s = -1; }
-	if ((dx == -1) && (dy == 1)) { *t = 0; *s = 0; }
-	if ((dx == 1) && (dy == -1)) { *t = 0; *s = 0; }
-	if ((dx == 0) && (dy == 0)) { *t = 0; *s = 0; }
-	if ((dx == 0) && (dy == 1)) { *t = 0; *s = 1; }
-	if ((dx == 1) && (dy == 0)) { *t = 1; *s = -1; }
-	if ((dx == 1) && (dy == 1)) { *t = 1; *s = 0; }
-}
 
-rbr_t rbr_add(rbr_t x, rbr_t y) {
-	rbr_t ans = 0, s = 0, t = 0;
-	int8_t ds, dt;
-	uint8_t i;
-	for (i = 0; i < 32; i++) {
-		rbr_add_st(x, y, &ds, &dt);
-		s += ds * (1llu << (i * 2));
-		t += dt * (1llu << (i * 2));
-		x >>= 2;
-		y >>= 2;
-	}
-	t <<= 2;
-	for (i = 0; i < 32; i++) {
-		ans += rbr_add_partial(s, t) * (1llu << (2 * i));
-		s >>= 2;
-		t >>= 2;
-	}
-	return ans;
-}
 
-rbr_t rbr_sub(rbr_t x, rbr_t y) {
-	return rbr_add(x, ~y);
-}
+
+
+
+
+
+
 
 
 
@@ -455,7 +536,13 @@ bool check_arrays_equal(uint32_t count, uint32_t* arr1, uint32_t* arr2) {
 
 
 
-main()
+
+
+
+
+
+
+int main()
 {
 	//printf("Hello World!\n");
 
@@ -469,43 +556,87 @@ main()
 	//printf("%" PRIu32 "\n", result);
 
 
-	// filter implementation
-	/*uint32_t filter_count = 0;
-	uint32_t* filter = read_file("filter.txt", &filter_count);
-	rns_t* filter_rns = int_to_rns_arrays(filter_count, filter);
-	print_numbers(filter_count, filter);
-
-	uint32_t signal_count = 0;
-	uint32_t* signal = read_file("signal.txt", &signal_count);
-	rns_t* signal_rns = int_to_rns_arrays(signal_count, signal);
-	print_numbers(signal_count, signal);
-
-	uint32_t* result_signal = apply_filter(filter_count, filter, signal_count, signal);
-	print_numbers(signal_count, result_signal);
-	rns_t* result_signal_rns = apply_filter_rns(filter_count, filter_rns, signal_count, signal_rns);
-	uint32_t* result_signal_rns_converted = rns_to_int_arrays(signal_count, result_signal_rns);
-	print_numbers(signal_count, result_signal_rns_converted);
-
-	bool are_equal = check_arrays_equal(signal_count, result_signal, result_signal_rns_converted);
-	if (are_equal)
-		printf("ARE EQUAL!!!");*/
 
 
 
-	uint32_t a = 0;
-	uint32_t b = 2;
-	rns_t a1 = int_to_rns(a);
-	rns_t b1 = int_to_rns(b);
-	int compare_result = compare(a1, b1);
-	printf("compare_result: %d\n", compare_result);
+
+	////filter implementation
+	//uint32_t filter_count = 0;
+	//uint32_t* filter = read_file("filter.txt", &filter_count);
+	//rns_t* filter_rns = int_to_rns_arrays(filter_count, filter);
+	//print_numbers(filter_count, filter);
+
+	//uint32_t signal_count = 0;
+	//uint32_t* signal = read_file("signal.txt", &signal_count);
+	//rns_t* signal_rns = int_to_rns_arrays(signal_count, signal);
+	//print_numbers(signal_count, signal);
+
+	//uint32_t* result_signal = apply_filter(filter_count, filter, signal_count, signal);
+	//print_numbers(signal_count, result_signal);
+	//rns_t* result_signal_rns = apply_filter_rns(filter_count, filter_rns, signal_count, signal_rns);
+	//uint32_t* result_signal_rns_converted = rns_to_int_arrays(signal_count, result_signal_rns);
+	//print_numbers(signal_count, result_signal_rns_converted);
+
+	//bool are_equal = check_arrays_equal(signal_count, result_signal, result_signal_rns_converted);
+	//if (are_equal)
+	//	printf("ARE EQUAL!!!");
 
 
-	uint32_t a2 = 987654321;
-	uint32_t b2 = 123456;
-	rns_t a3 = int_to_rns(a2);
-	rns_t b3 = int_to_rns(b2);
-	rns_t div_result_rns = div_rns_numbers(a3, b3);
-	int div_result = rns_to_int(div_result_rns);
-	printf("div_result: %d", div_result);
 
+
+
+
+
+	//uint32_t a = 0;
+	//uint32_t b = 2;
+	//rns_t a1 = int_to_rns(a);
+	//rns_t b1 = int_to_rns(b);
+	//int compare_result = compare(a1, b1);
+	//printf("compare_result: %d\n", compare_result);
+
+
+	//uint32_t a2 = 987654321;
+	//uint32_t b2 = 123456;
+	//rns_t a3 = int_to_rns(a2);
+	//rns_t b3 = int_to_rns(b2);
+	//rns_t div_result_rns = div_rns_numbers(a3, b3);
+	//int div_result = rns_to_int(div_result_rns);
+	//printf("div_result: %d", div_result);
+
+
+
+
+
+
+
+	//long sqrtRes = sqrt_cpu_newton(6090);
+	//printf("div_result: %d\n", sqrtRes);
+
+	//rns_t a10 = int_to_rns(6084);
+	//rns_t sqrtRes_rns = sqrt_rns(a10);
+	//int res = rns_to_int(sqrtRes_rns);
+	//printf("div_result: %d\n", res);
+
+
+
+
+
+	//int res1 = ex(4, -5);
+	//printf("div_result: %d\n", pow(3,3));
+
+
+
+
+
+
+	rns_fp_t i = double_to_rns_fp(5.6);
+	rns_fp_t k = double_to_rns_fp(10.1);
+	rns_fp_t rns_fp_res = div_rns_fp_numbers(k, i);
+	double rns_fp_int_res = rns_fp_to_double(rns_fp_res);
+	rns_fp_t rns_fp_int_res2 = mul_rns_fp_numbers(k, i);
+	double rns_fp_int_res3 = rns_fp_to_double(rns_fp_int_res2);
+
+
+
+	return 0;
 }
