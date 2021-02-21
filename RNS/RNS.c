@@ -550,13 +550,6 @@ rns_t* apply_filter_rns(uint32_t filter_count, rns_t* filter, uint32_t signal_co
 	return result;
 }
 
-void print_numbers(uint32_t count, uint32_t* numbers) {
-	for (int i = 0; i < count; i++) {
-		printf("%d\n", numbers[i]);
-	}
-	printf("\n");
-}
-
 
 
 
@@ -582,26 +575,6 @@ int main()
 
 	bool a1pos = is_positive(a1);
 	bool a1m = is_positive(a1minusa2);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
