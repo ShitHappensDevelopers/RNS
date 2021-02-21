@@ -20,6 +20,8 @@ module decoder
         2'b00: if (Funct[4:1] == 4'b1101) controls = 12'b000000100101;
 							 // Data-processing immediate 
 			   else if (Funct[5]) controls = 12'b000010100100;
+                             // MUL
+               //else if (Funct[4:2] == 4'b000) controls = 12'b;
                              // Data-processing register
                else controls = 12'b000000100100; 
                              // LDR 

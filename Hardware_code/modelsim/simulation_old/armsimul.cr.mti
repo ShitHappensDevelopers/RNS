@@ -1,0 +1,37 @@
+C:/Modeltech_pe_edu_10.4a/examples/schoolarm/testbench.sv {1 {vlog -work work -sv -stats=none C:/Modeltech_pe_edu_10.4a/examples/schoolarm/testbench.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module testbench
+-- Compiling module top
+-- Compiling module dmem
+-- Compiling module imem
+
+Top level modules:
+	testbench
+
+} {} {}} C:/Modeltech_pe_edu_10.4a/examples/schoolarm/sm_top.sv {1 {vlog -work work -sv -stats=none C:/Modeltech_pe_edu_10.4a/examples/schoolarm/sm_top.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module arm
+-- Compiling module controller
+-- Compiling module decoder
+-- Compiling module condlogic
+-- Compiling module condcheck
+-- Compiling module datapath
+-- Compiling module alu
+-- Compiling module regfile
+-- Compiling module adder
+-- Compiling module extend
+-- Compiling module flopr
+-- Compiling module flopenr
+-- Compiling module mux2
+
+Top level modules:
+	arm
+
+} {} {}} C:/Modeltech_pe_edu_10.4a/examples/schoolarm/board_top.sv {1 {vlog -work work -sv -stats=none C:/Modeltech_pe_edu_10.4a/examples/schoolarm/board_top.sv
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module board_top
+
+Top level modules:
+	board_top
+
+} {} {}}

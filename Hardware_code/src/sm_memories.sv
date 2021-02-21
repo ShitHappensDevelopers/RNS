@@ -23,20 +23,17 @@ module instruction_memory
     output logic [ 31:0 ] read_data
 );
 
-    //logic [31:0] RAM[63:0];
-    //initial $readmemh("memfile.dat", RAM);
-    //assign read_data = RAM[adress[31:2]]; // word aligned
+    logic [31:0] RAM[63:0];
+    initial $readmemh("memfile.dat", RAM);
+    assign read_data = RAM[adress[31:2]]; // word aligned
 	
-    logic [7:0] RAM[255:0];
-    initial begin 
-    RAM = '{default: 8'b0};
-    $readmemh("memfile.dat", RAM);
-    end
+    /*logic [7:0] RAM[255:0];
+    initial $readmemh("memfile.dat", RAM);
     
     logic [7:0] b0, b1, b2, b3;
     assign b3  = RAM[adress[31:0]]; // word aligned 
     assign b2  = RAM[adress[31:0]+1]; // word aligned 
     assign b1  = RAM[adress[31:0]+2]; // word aligned 
     assign b0  = RAM[adress[31:0]+3]; // word aligned
-    assign  read_data = {b3,b2,b1,b0};
+    assign  read_data = {b3,b2,b1,b0};*/
 endmodule   

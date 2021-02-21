@@ -1,0 +1,490 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dD:/intelFPGA_pro/18.1
+vadder
+Z0 DXx6 sv_std 3 std 0 22 ;edk3;YfCLjCm[Hd=`UGQ2
+Z1 !s110 1613904549
+!i10b 1
+!s100 Wb]Il:SZSSM99SC1hI@<d0
+I[Ki^5cUXUE@WIbg1dl?Pd1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 !s105 sm_src_sv_unit
+S1
+Z4 dD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/modelsim/simulation
+Z5 w1613900242
+Z6 8D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_src.sv
+Z7 FD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_src.sv
+L0 106
+Z8 OV;L;10.6d;65
+r1
+!s85 0
+31
+Z9 !s108 1613904549.000000
+Z10 !s107 D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_src.sv|
+Z11 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_src.sv|
+!i113 1
+Z12 o-work work -sv
+Z13 tCvgOpt 0
+valu
+R0
+R1
+!i10b 1
+!s100 L=hPZ3OMA@djC<?Q8N^I22
+IK9o2zM:iMX@a9@5TkG>D[3
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 53
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vboard_top
+R0
+Z14 !s110 1613904547
+!i10b 1
+!s100 nJ?5_QZ1`adgHQDQjZ[WL0
+ID>ilEG5c^aMLQ`9G8f7LW3
+R2
+!s105 board_top_sv_unit
+S1
+R4
+Z15 w1555033340
+8D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/modelsim/simulation/board_top.sv
+FD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/modelsim/simulation/board_top.sv
+L0 1
+R8
+r1
+!s85 0
+31
+!s108 1613904546.000000
+!s107 D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/modelsim/simulation/board_top.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/modelsim/simulation/board_top.sv|
+!i113 1
+R12
+R13
+vcondcheck
+R0
+R1
+!i10b 1
+!s100 hPg3LjP9?MCE:^L;4A]Lm0
+IkP0^Q4D;_Vbg^mn@:j5Q[1
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 23
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vcondlogic
+R0
+R1
+!i10b 1
+!s100 4UHNmR7Yo;8=m5A]:W;F>0
+InA4b3ZfKCHL>QD5i3^fIB2
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vdata_memory
+R0
+Z16 !s110 1613904548
+!i10b 1
+!s100 jzMIdKO3]O]1zm=RoC31U3
+Ic@=jg=VZgHHFoi>VO_39T3
+R2
+Z17 !s105 sm_memories_sv_unit
+S1
+R4
+R15
+Z18 8D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_memories.sv
+Z19 FD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_memories.sv
+L0 1
+R8
+r1
+!s85 0
+31
+Z20 !s108 1613904548.000000
+Z21 !s107 D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_memories.sv|
+Z22 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_memories.sv|
+!i113 1
+R12
+R13
+vdecoder
+R0
+R14
+!i10b 1
+!s100 n[:WhXhTP;B[o4F4_h2m91
+ITX@HL^9XGIzT2bmc8:dQi1
+R2
+!s105 decoder_sv_unit
+S1
+R4
+R15
+8D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/decoder.sv
+FD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/decoder.sv
+L0 1
+R8
+r1
+!s85 0
+31
+Z23 !s108 1613904547.000000
+!s107 D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/decoder.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/decoder.sv|
+!i113 1
+R12
+R13
+vextend
+R0
+R1
+!i10b 1
+!s100 `iY>JegbRTTAA1KgULkNC1
+IO3`[4Ibo1]BKH16i`9KzO1
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 89
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vflopenr
+R0
+R1
+!i10b 1
+!s100 `UYRTWV6gJz0]UhN^eD<61
+Ii`h8<ReRh5KS1iITlFh3M2
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 124
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vflopr
+R0
+R1
+!i10b 1
+!s100 bkzm:1c0NLmZ><9`T=Sg^0
+I9=C25:[c@6jJNlj5oMmXL3
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 114
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vinstruction_memory
+R0
+R16
+!i10b 1
+!s100 Xbogk:=hH18QX=cfc[Sd80
+I@36SeTR@f;A9?[46kQf6W0
+R2
+R17
+S1
+R4
+R15
+R18
+R19
+L0 20
+R8
+r1
+!s85 0
+31
+R20
+R21
+R22
+!i113 1
+R12
+R13
+vmux2
+R0
+R14
+!i10b 1
+!s100 bCf8NL<k=<N01:=eO^UB30
+I]MMi1JFM[H_KNdNBz^A490
+R2
+!s105 mux2_sv_unit
+S1
+R4
+R15
+8D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/mux2.sv
+FD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/mux2.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R23
+!s107 D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/mux2.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/mux2.sv|
+!i113 1
+R12
+R13
+vsm_arm
+R0
+R16
+!i10b 1
+!s100 @gAREzXkQKe;@hI4@=kBX2
+IhWj7f3]cFeTEzb`SeL0L_2
+R2
+!s105 sm_arm_sv_unit
+S1
+R4
+R15
+8D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_arm.sv
+FD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_arm.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R23
+!s107 D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_arm.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_arm.sv|
+!i113 1
+R12
+R13
+vsm_clk_divider
+R0
+R16
+!i10b 1
+!s100 0V_D6kf:24RZ5fKoD2JQ[1
+IH<1YW;DLK;Fd^?KMh12:N2
+R2
+Z24 !s105 sm_clk_devider_sv_unit
+S1
+R4
+R15
+Z25 8D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_clk_devider.sv
+Z26 FD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_clk_devider.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R20
+Z27 !s107 D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_clk_devider.sv|
+Z28 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_clk_devider.sv|
+!i113 1
+R12
+R13
+vsm_controller
+R0
+R16
+!i10b 1
+!s100 4KYdH`BIE1m7>lKg?gioz1
+I?e1H;>1k^e3c<0_o54KVL3
+R2
+!s105 sm_controller_sv_unit
+S1
+R4
+R15
+8D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_controller.sv
+FD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_controller.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R20
+!s107 D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_controller.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_controller.sv|
+!i113 1
+R12
+R13
+vsm_datapath
+R0
+R16
+!i10b 1
+!s100 WJkQS6?^VZCRTizUNaP=93
+IFX0jg6PeNQAiaQ>QASkjA2
+R2
+!s105 sm_datapath_sv_unit
+S1
+R4
+R15
+8D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_datapath.sv
+FD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_datapath.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R20
+!s107 D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_datapath.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_datapath.sv|
+!i113 1
+R12
+R13
+vsm_register_file
+R0
+R16
+!i10b 1
+!s100 9imHfDWM;aRZd3[h3L<dc2
+ISd>3CVbRImO@[h7Mi]B:60
+R2
+!s105 sm_register_file_sv_unit
+S1
+R4
+R15
+8D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_register_file.sv
+FD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_register_file.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R20
+!s107 D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_register_file.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_register_file.sv|
+!i113 1
+R12
+R13
+vsm_register_we
+R0
+R16
+!i10b 1
+!s100 RNciFi]UE6291D`F4ia@j3
+IW5W5KWOeN8ioMf[iTG]Y03
+R2
+R24
+S1
+R4
+R15
+R25
+R26
+L0 25
+R8
+r1
+!s85 0
+31
+R20
+R27
+R28
+!i113 1
+R12
+R13
+vsm_top
+R0
+R1
+!i10b 1
+!s100 KMckU8KnWT0B]1:a;Hc>l2
+I<^Y0fhSY3gEQK`DogAL8K2
+R2
+!s105 sm_top_sv_unit
+S1
+R4
+R15
+8D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_top.sv
+FD:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_top.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+!s107 D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_top.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/magister_3_semester/Diploma/RNS_repo/Hardware_code/src/sm_top.sv|
+!i113 1
+R12
+R13
+vtestbench
+R0
+!s110 1613905647
+!i10b 1
+!s100 7^e<ocb9ReU_NXkhz8zIz2
+I]@RW[gBbL;2HXLIXgXdOS0
+R2
+!s105 testbench_sv_unit
+S1
+R4
+w1613905548
+8D:\magister_3_semester\Diploma\RNS_repo\Hardware_code\modelsim\simulation\testbench.sv
+FD:\magister_3_semester\Diploma\RNS_repo\Hardware_code\modelsim\simulation\testbench.sv
+L0 7
+R8
+r1
+!s85 0
+31
+!s108 1613905647.000000
+!s107 D:\magister_3_semester\Diploma\RNS_repo\Hardware_code\modelsim\simulation\testbench.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|D:\magister_3_semester\Diploma\RNS_repo\Hardware_code\modelsim\simulation\testbench.sv|
+!i113 1
+R12
+R13

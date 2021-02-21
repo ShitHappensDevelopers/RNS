@@ -7,8 +7,8 @@
 module testbench(); 
     logic clk; 
     logic reset; 
-    logic [31:0] WriteData, DataAdr; 
-    logic MemWrite;
+    //logic [31:0] WriteData, DataAdr; 
+    //logic MemWrite;
  
     // instantiate device to be tested 
     //wire          clk;

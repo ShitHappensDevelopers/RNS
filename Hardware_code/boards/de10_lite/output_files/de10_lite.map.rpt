@@ -1,0 +1,849 @@
+Analysis & Synthesis report for de10_lite
+Fri Apr 12 04:33:45 2019
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_clk_divider:sm_clk_divider
+ 12. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_clk_divider:sm_clk_divider|sm_register_we:r_cntr
+ 13. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl|flopenr:flagreg1
+ 14. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl|flopenr:flagreg0
+ 15. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:pcmux
+ 16. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|flopr:pcreg
+ 17. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|adder:pcadd1
+ 18. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|adder:pcadd2
+ 19. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:ra1mux
+ 20. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:ra2mux
+ 21. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:a3mux
+ 22. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:resmux
+ 23. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:writeData3_mux
+ 24. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcASrc_mux
+ 25. Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcbmux
+ 26. Port Connectivity Checks: "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcASrc_mux"
+ 27. Port Connectivity Checks: "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:a3mux"
+ 28. Port Connectivity Checks: "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:ra1mux"
+ 29. Port Connectivity Checks: "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|adder:pcadd2"
+ 30. Port Connectivity Checks: "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|adder:pcadd1"
+ 31. Port Connectivity Checks: "sm_top:sm_top"
+ 32. Post-Synthesis Netlist Statistics for Top Partition
+ 33. Elapsed Time Per Partition
+ 34. Analysis & Synthesis Messages
+ 35. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Fri Apr 12 04:33:45 2019       ;
+; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
+; Revision Name                      ; de10_lite                                   ;
+; Top-level Entity Name              ; board_top                                   ;
+; Family                             ; MAX 10                                      ;
+; Total logic elements               ; 5,148                                       ;
+;     Total combinational functions  ; 2,684                                       ;
+;     Dedicated logic registers      ; 2,586                                       ;
+; Total registers                    ; 2586                                        ;
+; Total pins                         ; 19                                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
+; UFM blocks                         ; 0                                           ;
+; ADC blocks                         ; 0                                           ;
++------------------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; 10M50DAF484C7G     ;                    ;
+; Top-level entity name                                            ; board_top          ; de10_lite          ;
+; Family name                                                      ; MAX 10             ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 2           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.1%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                         ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                     ; Library ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------------------------+---------+
+; ../../src/sm_controller.sv       ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_controller.sv          ;         ;
+; ../../src/decoder.sv             ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/decoder.sv                ;         ;
+; ../../src/mux2.sv                ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/mux2.sv                   ;         ;
+; board_top.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/board_top.sv ;         ;
+; sm_src.sv                        ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/sm_src.sv    ;         ;
+; ../../src/sm_arm.sv              ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_arm.sv                 ;         ;
+; ../../src/sm_clk_devider.sv      ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_clk_devider.sv         ;         ;
+; ../../src/sm_datapath.sv         ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_datapath.sv            ;         ;
+; ../../src/sm_memories.sv         ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_memories.sv            ;         ;
+; ../../src/sm_register_file.sv    ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_register_file.sv       ;         ;
+; ../../src/sm_top.sv              ; yes             ; User SystemVerilog HDL File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_top.sv                 ;         ;
+; memfile.dat                      ; yes             ; Auto-Found Unspecified File  ; C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/memfile.dat  ;         ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------------------------------------+---------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                                                                    ;
++---------------------------------------------+----------------------------------------------------------------------------------+
+; Resource                                    ; Usage                                                                            ;
++---------------------------------------------+----------------------------------------------------------------------------------+
+; Estimated Total logic elements              ; 5,148                                                                            ;
+;                                             ;                                                                                  ;
+; Total combinational functions               ; 2684                                                                             ;
+; Logic element usage by number of LUT inputs ;                                                                                  ;
+;     -- 4 input functions                    ; 2403                                                                             ;
+;     -- 3 input functions                    ; 177                                                                              ;
+;     -- <=2 input functions                  ; 104                                                                              ;
+;                                             ;                                                                                  ;
+; Logic elements by mode                      ;                                                                                  ;
+;     -- normal mode                          ; 2573                                                                             ;
+;     -- arithmetic mode                      ; 111                                                                              ;
+;                                             ;                                                                                  ;
+; Total registers                             ; 2586                                                                             ;
+;     -- Dedicated logic registers            ; 2586                                                                             ;
+;     -- I/O registers                        ; 0                                                                                ;
+;                                             ;                                                                                  ;
+; I/O pins                                    ; 19                                                                               ;
+;                                             ;                                                                                  ;
+; Embedded Multiplier 9-bit elements          ; 0                                                                                ;
+;                                             ;                                                                                  ;
+; Maximum fan-out node                        ; sm_top:sm_top|sm_clk_divider:sm_clk_divider|sm_register_we:r_cntr|dividerReg[22] ;
+; Maximum fan-out                             ; 2564                                                                             ;
+; Total fan-out                               ; 18701                                                                            ;
+; Average fan-out                             ; 3.52                                                                             ;
++---------------------------------------------+----------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                         ;
++-------------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------+--------------------+--------------+
+; Compilation Hierarchy Node                      ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                              ; Entity Name        ; Library Name ;
++-------------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------+--------------------+--------------+
+; |board_top                                      ; 2684 (0)            ; 2586 (0)                  ; 0           ; 0          ; 0            ; 0       ; 0         ; 19   ; 0            ; 0          ; |board_top                                                                                       ; board_top          ; work         ;
+;    |sm_top:sm_top|                              ; 2684 (0)            ; 2586 (0)                  ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top                                                                         ; sm_top             ; work         ;
+;       |data_memory:data_memory|                 ; 1424 (1424)         ; 2048 (2048)               ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|data_memory:data_memory                                                 ; data_memory        ; work         ;
+;       |instruction_memory:instruction_memory|   ; 76 (76)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|instruction_memory:instruction_memory                                   ; instruction_memory ; work         ;
+;       |sm_arm:sm_arm|                           ; 1161 (0)            ; 515 (0)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm                                                           ; sm_arm             ; work         ;
+;          |sm_controller:sm_controller|          ; 24 (0)              ; 3 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller                               ; sm_controller      ; work         ;
+;             |condlogic:cl|                      ; 13 (5)              ; 3 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl                  ; condlogic          ; work         ;
+;                |condcheck:cc|                   ; 6 (6)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl|condcheck:cc     ; condcheck          ; work         ;
+;                |flopenr:flagreg0|               ; 2 (2)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl|flopenr:flagreg0 ; flopenr            ; work         ;
+;                |flopenr:flagreg1|               ; 0 (0)               ; 2 (2)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl|flopenr:flagreg1 ; flopenr            ; work         ;
+;             |decoder:decoder|                   ; 11 (11)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|decoder:decoder               ; decoder            ; work         ;
+;          |sm_datapath:sm_datapath|              ; 1137 (0)            ; 512 (0)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath                                   ; sm_datapath        ; work         ;
+;             |adder:pcadd1|                      ; 30 (30)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|adder:pcadd1                      ; adder              ; work         ;
+;             |adder:pcadd2|                      ; 30 (30)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|adder:pcadd2                      ; adder              ; work         ;
+;             |alu:alu|                           ; 142 (142)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|alu:alu                           ; alu                ; work         ;
+;             |flopr:pcreg|                       ; 30 (30)             ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|flopr:pcreg                       ; flopr              ; work         ;
+;             |mux2:a3mux|                        ; 5 (5)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:a3mux                        ; mux2               ; work         ;
+;             |mux2:ra1mux|                       ; 4 (4)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:ra1mux                       ; mux2               ; work         ;
+;             |mux2:ra2mux|                       ; 4 (4)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:ra2mux                       ; mux2               ; work         ;
+;             |mux2:resmux|                       ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:resmux                       ; mux2               ; work         ;
+;             |mux2:srcASrc_mux|                  ; 361 (361)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcASrc_mux                  ; mux2               ; work         ;
+;             |mux2:srcbmux|                      ; 45 (45)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcbmux                      ; mux2               ; work         ;
+;             |mux2:writeData3_mux|               ; 37 (37)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:writeData3_mux               ; mux2               ; work         ;
+;             |sm_register_file:sm_register_file| ; 447 (447)           ; 480 (480)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|sm_register_file:sm_register_file ; sm_register_file   ; work         ;
+;       |sm_clk_divider:sm_clk_divider|           ; 23 (0)              ; 23 (0)                    ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_clk_divider:sm_clk_divider                                           ; sm_clk_divider     ; work         ;
+;          |sm_register_we:r_cntr|                ; 23 (23)             ; 23 (23)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |board_top|sm_top:sm_top|sm_clk_divider:sm_clk_divider|sm_register_we:r_cntr                     ; sm_register_we     ; work         ;
++-------------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------+--------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                              ;
++--------------------------------------------------------------------------------------------+--------------------+
+; Register name                                                                              ; Reason for Removal ;
++--------------------------------------------------------------------------------------------+--------------------+
+; sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl|flopenr:flagreg0|q[1] ; Lost fanout        ;
+; sm_top:sm_top|sm_clk_divider:sm_clk_divider|sm_register_we:r_cntr|dividerReg[23..31]       ; Lost fanout        ;
+; Total Number of Removed Registers = 10                                                     ;                    ;
++--------------------------------------------------------------------------------------------+--------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 2586  ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 30    ;
+; Number of registers using Asynchronous Clear ; 538   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 2554  ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------+
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|decoder:decoder|FlagW[1]                     ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; No         ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|alu:alu|Mux5                                     ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcbmux|y[14]                               ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcbmux|y[0]                                ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcbmux|y[6]                                ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcbmux|y[11]                               ;
+; 17:1               ; 10 bits   ; 110 LEs       ; 100 LEs              ; 10 LEs                 ; No         ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|sm_register_file:sm_register_file|read_data0[0]  ;
+; 17:1               ; 32 bits   ; 352 LEs       ; 320 LEs              ; 32 LEs                 ; No         ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|sm_register_file:sm_register_file|read_data2[19] ;
+; 18:1               ; 32 bits   ; 384 LEs       ; 352 LEs              ; 32 LEs                 ; No         ; |board_top|sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcASrc_mux|y[25]                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_clk_divider:sm_clk_divider ;
++----------------+-------+-----------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                            ;
++----------------+-------+-----------------------------------------------------------------+
+; shift          ; 16    ; Signed Integer                                                  ;
+; bypass         ; 0     ; Signed Integer                                                  ;
++----------------+-------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_clk_divider:sm_clk_divider|sm_register_we:r_cntr ;
++----------------+-------+---------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                  ;
++----------------+-------+---------------------------------------------------------------------------------------+
+; SIZE           ; 32    ; Signed Integer                                                                        ;
++----------------+-------+---------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl|flopenr:flagreg1 ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                      ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+; WIDTH          ; 2     ; Signed Integer                                                                                            ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl|flopenr:flagreg0 ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                      ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+; WIDTH          ; 2     ; Signed Integer                                                                                            ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:pcmux ;
++----------------+-------+------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                               ;
++----------------+-------+------------------------------------------------------------------------------------+
+; WIDTH          ; 32    ; Signed Integer                                                                     ;
++----------------+-------+------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|flopr:pcreg ;
++----------------+-------+-------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                ;
++----------------+-------+-------------------------------------------------------------------------------------+
+; WIDTH          ; 32    ; Signed Integer                                                                      ;
++----------------+-------+-------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|adder:pcadd1 ;
++----------------+-------+--------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------------+
+; WIDTH          ; 32    ; Signed Integer                                                                       ;
++----------------+-------+--------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|adder:pcadd2 ;
++----------------+-------+--------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------------+
+; WIDTH          ; 32    ; Signed Integer                                                                       ;
++----------------+-------+--------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:ra1mux ;
++----------------+-------+-------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                ;
++----------------+-------+-------------------------------------------------------------------------------------+
+; WIDTH          ; 4     ; Signed Integer                                                                      ;
++----------------+-------+-------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:ra2mux ;
++----------------+-------+-------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                ;
++----------------+-------+-------------------------------------------------------------------------------------+
+; WIDTH          ; 4     ; Signed Integer                                                                      ;
++----------------+-------+-------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:a3mux ;
++----------------+-------+------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                               ;
++----------------+-------+------------------------------------------------------------------------------------+
+; WIDTH          ; 4     ; Signed Integer                                                                     ;
++----------------+-------+------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:resmux ;
++----------------+-------+-------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                ;
++----------------+-------+-------------------------------------------------------------------------------------+
+; WIDTH          ; 32    ; Signed Integer                                                                      ;
++----------------+-------+-------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:writeData3_mux ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                        ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; WIDTH          ; 32    ; Signed Integer                                                                              ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcASrc_mux ;
++----------------+-------+------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                     ;
++----------------+-------+------------------------------------------------------------------------------------------+
+; WIDTH          ; 32    ; Signed Integer                                                                           ;
++----------------+-------+------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcbmux ;
++----------------+-------+--------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------------+
+; WIDTH          ; 32    ; Signed Integer                                                                       ;
++----------------+-------+--------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:srcASrc_mux" ;
++------+-------+----------+------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                ;
++------+-------+----------+------------------------------------------------------------------------+
+; d1   ; Input ; Info     ; Stuck at GND                                                           ;
++------+-------+----------+------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:a3mux" ;
++----------+-------+----------+--------------------------------------------------------------+
+; Port     ; Type  ; Severity ; Details                                                      ;
++----------+-------+----------+--------------------------------------------------------------+
+; d1[3..1] ; Input ; Info     ; Stuck at VCC                                                 ;
+; d1[0]    ; Input ; Info     ; Stuck at GND                                                 ;
++----------+-------+----------+--------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:ra1mux" ;
++------+-------+----------+-------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                           ;
++------+-------+----------+-------------------------------------------------------------------+
+; d1   ; Input ; Info     ; Stuck at VCC                                                      ;
++------+-------+----------+-------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|adder:pcadd2" ;
++----------+-------+----------+----------------------------------------------------------------+
+; Port     ; Type  ; Severity ; Details                                                        ;
++----------+-------+----------+----------------------------------------------------------------+
+; b[31..3] ; Input ; Info     ; Stuck at GND                                                   ;
+; b[1..0]  ; Input ; Info     ; Stuck at GND                                                   ;
+; b[2]     ; Input ; Info     ; Stuck at VCC                                                   ;
++----------+-------+----------+----------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|adder:pcadd1" ;
++----------+-------+----------+----------------------------------------------------------------+
+; Port     ; Type  ; Severity ; Details                                                        ;
++----------+-------+----------+----------------------------------------------------------------+
+; b[31..3] ; Input ; Info     ; Stuck at GND                                                   ;
+; b[1..0]  ; Input ; Info     ; Stuck at GND                                                   ;
+; b[2]     ; Input ; Info     ; Stuck at VCC                                                   ;
++----------+-------+----------+----------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "sm_top:sm_top"                                                                                 ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port            ; Type   ; Severity ; Details                                                                             ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
+; clkDevide[2..1] ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; clkDevide[3]    ; Input  ; Info     ; Stuck at GND                                                                        ;
+; clkDevide[0]    ; Input  ; Info     ; Stuck at GND                                                                        ;
+; clk             ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; regData[31..10] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 19                          ;
+; cycloneiii_ff         ; 2586                        ;
+;     CLR               ; 2                           ;
+;     CLR SLD           ; 30                          ;
+;     ENA               ; 2048                        ;
+;     ENA CLR           ; 506                         ;
+; cycloneiii_lcell_comb ; 2684                        ;
+;     arith             ; 111                         ;
+;         2 data inputs ; 78                          ;
+;         3 data inputs ; 33                          ;
+;     normal            ; 2573                        ;
+;         1 data inputs ; 3                           ;
+;         2 data inputs ; 23                          ;
+;         3 data inputs ; 144                         ;
+;         4 data inputs ; 2403                        ;
+;                       ;                             ;
+; Max LUT depth         ; 21.70                       ;
+; Average LUT depth     ; 12.91                       ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:14     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+    Info: Processing started: Fri Apr 12 04:33:09 2019
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off de10_lite -c de10_lite
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file /users/tema/desktop/semester_8/diploma/schoolarm/repos/schoolarm/src/sm_controller.sv
+    Info (12023): Found entity 1: sm_controller File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_controller.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /users/tema/desktop/semester_8/diploma/schoolarm/repos/schoolarm/src/decoder.sv
+    Info (12023): Found entity 1: decoder File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/decoder.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /users/tema/desktop/semester_8/diploma/schoolarm/repos/schoolarm/src/mux2.sv
+    Info (12023): Found entity 1: mux2 File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/mux2.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file board_top.sv
+    Info (12023): Found entity 1: board_top File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/board_top.sv Line: 1
+Info (12021): Found 7 design units, including 7 entities, in source file sm_src.sv
+    Info (12023): Found entity 1: condlogic File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/sm_src.sv Line: 1
+    Info (12023): Found entity 2: condcheck File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/sm_src.sv Line: 23
+    Info (12023): Found entity 3: alu File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/sm_src.sv Line: 53
+    Info (12023): Found entity 4: extend File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/sm_src.sv Line: 89
+    Info (12023): Found entity 5: adder File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/sm_src.sv Line: 106
+    Info (12023): Found entity 6: flopr File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/sm_src.sv Line: 114
+    Info (12023): Found entity 7: flopenr File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/sm_src.sv Line: 124
+Info (12021): Found 1 design units, including 1 entities, in source file /users/tema/desktop/semester_8/diploma/schoolarm/repos/schoolarm/src/sm_arm.sv
+    Info (12023): Found entity 1: sm_arm File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_arm.sv Line: 1
+Info (12021): Found 2 design units, including 2 entities, in source file /users/tema/desktop/semester_8/diploma/schoolarm/repos/schoolarm/src/sm_clk_devider.sv
+    Info (12023): Found entity 1: sm_clk_divider File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_clk_devider.sv Line: 1
+    Info (12023): Found entity 2: sm_register_we File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_clk_devider.sv Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file /users/tema/desktop/semester_8/diploma/schoolarm/repos/schoolarm/src/sm_datapath.sv
+    Info (12023): Found entity 1: sm_datapath File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_datapath.sv Line: 1
+Info (12021): Found 2 design units, including 2 entities, in source file /users/tema/desktop/semester_8/diploma/schoolarm/repos/schoolarm/src/sm_memories.sv
+    Info (12023): Found entity 1: data_memory File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_memories.sv Line: 1
+    Info (12023): Found entity 2: instruction_memory File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_memories.sv Line: 20
+Info (12021): Found 1 design units, including 1 entities, in source file /users/tema/desktop/semester_8/diploma/schoolarm/repos/schoolarm/src/sm_register_file.sv
+    Info (12023): Found entity 1: sm_register_file File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_register_file.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /users/tema/desktop/semester_8/diploma/schoolarm/repos/schoolarm/src/sm_top.sv
+    Info (12023): Found entity 1: sm_top File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_top.sv Line: 1
+Info (12127): Elaborating entity "board_top" for the top level hierarchy
+Info (12128): Elaborating entity "sm_top" for hierarchy "sm_top:sm_top" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/board_top.sv Line: 26
+Info (12128): Elaborating entity "sm_clk_divider" for hierarchy "sm_top:sm_top|sm_clk_divider:sm_clk_divider" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_top.sv Line: 19
+Info (12128): Elaborating entity "sm_register_we" for hierarchy "sm_top:sm_top|sm_clk_divider:sm_clk_divider|sm_register_we:r_cntr" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_clk_devider.sv Line: 17
+Info (12128): Elaborating entity "instruction_memory" for hierarchy "sm_top:sm_top|instruction_memory:instruction_memory" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_top.sv Line: 24
+Warning (10850): Verilog HDL warning at sm_memories.sv(27): number of words (35) in memory file does not match the number of elements in the address range [0:63] File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_memories.sv Line: 27
+Warning (10030): Net "RAM.data_a" at sm_memories.sv(26) has no driver or initial value, using a default initial value '0' File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_memories.sv Line: 26
+Warning (10030): Net "RAM.waddr_a" at sm_memories.sv(26) has no driver or initial value, using a default initial value '0' File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_memories.sv Line: 26
+Warning (10030): Net "RAM.we_a" at sm_memories.sv(26) has no driver or initial value, using a default initial value '0' File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_memories.sv Line: 26
+Info (12128): Elaborating entity "data_memory" for hierarchy "sm_top:sm_top|data_memory:data_memory" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_top.sv Line: 39
+Info (12128): Elaborating entity "sm_arm" for hierarchy "sm_top:sm_top|sm_arm:sm_arm" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_top.sv Line: 54
+Info (12128): Elaborating entity "sm_controller" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_arm.sv Line: 28
+Info (12128): Elaborating entity "decoder" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|decoder:decoder" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_controller.sv Line: 24
+Info (12128): Elaborating entity "condlogic" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_controller.sv Line: 28
+Info (12128): Elaborating entity "flopenr" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl|flopenr:flagreg1" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/sm_src.sv Line: 12
+Info (12128): Elaborating entity "condcheck" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_controller:sm_controller|condlogic:cl|condcheck:cc" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/sm_src.sv Line: 16
+Info (12128): Elaborating entity "sm_datapath" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_arm.sv Line: 51
+Info (12128): Elaborating entity "mux2" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:pcmux" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_datapath.sv Line: 36
+Info (12128): Elaborating entity "flopr" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|flopr:pcreg" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_datapath.sv Line: 37
+Info (12128): Elaborating entity "adder" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|adder:pcadd1" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_datapath.sv Line: 38
+Info (12128): Elaborating entity "mux2" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|mux2:ra1mux" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_datapath.sv Line: 42
+Info (12128): Elaborating entity "sm_register_file" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|sm_register_file:sm_register_file" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_datapath.sv Line: 61
+Info (12128): Elaborating entity "extend" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|extend:ext" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_datapath.sv Line: 64
+Info (12128): Elaborating entity "alu" for hierarchy "sm_top:sm_top|sm_arm:sm_arm|sm_datapath:sm_datapath|alu:alu" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_datapath.sv Line: 71
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/db/de10_lite.ram0_instruction_memory_68fd8bb8.hdl.mif" contains "don't care" values -- overwriting them with 0s
+Info (276014): Found 2 instances of uninferred RAM logic
+    Info (276013): RAM logic "sm_top:sm_top|instruction_memory:instruction_memory|RAM" is uninferred because MIF is not supported for the selected family File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_memories.sv Line: 26
+    Info (276007): RAM logic "sm_top:sm_top|data_memory:data_memory|RAM" is uninferred due to asynchronous read logic File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/src/sm_memories.sv Line: 10
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/db/de10_lite.ram0_instruction_memory_68fd8bb8.hdl.mif" contains "don't care" values -- overwriting them with 0s
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 10 registers lost all their fanouts during netlist optimizations.
+Warning (20013): Ignored 185 assignments for entity "DE10_Lite" -- entity does not exist in design
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[10] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[11] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[12] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[13] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[14] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[15] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[8] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_IO[9] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ARDUINO_RESET_N -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK2_50 -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_50 -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_ADC_10 -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[10] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[11] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[12] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[8] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_ADDR[9] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_BA[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_BA[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_CAS_N -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_CKE -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_CLK -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_CS_N -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[10] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[11] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[12] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[13] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[14] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[15] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[8] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_DQ[9] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_LDQM -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_RAS_N -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_UDQM -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to DRAM_WE_N -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[10] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[11] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[12] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[13] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[14] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[15] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[16] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[17] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[18] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[19] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[20] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[21] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[22] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[23] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[24] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[25] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[26] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[27] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[28] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[29] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[30] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[31] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[32] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[33] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[34] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[35] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[8] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to GPIO[9] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to G_SENSOR_CS_N -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to G_SENSOR_INT[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to G_SENSOR_INT[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to G_SENSOR_SCLK -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to G_SENSOR_SDI -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to G_SENSOR_SDO -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX0[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX1[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX1[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX1[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX1[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX1[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX1[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX1[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX1[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX2[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX3[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX4[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX4[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX4[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX4[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX4[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX4[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX4[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX4[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to KEY[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3 V SCHMITT TRIGGER" -to KEY[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[8] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[9] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[4] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[5] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[6] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[7] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[8] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[9] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_HS -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[0] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[1] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[2] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[3] -entity DE10_Lite was ignored
+    Warning (20014): Assignment for entity set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_VS -entity DE10_Lite was ignored
+Info (144001): Generated suppressed messages file C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/output_files/de10_lite.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 2 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "KEY[1]" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/board_top.sv Line: 4
+    Warning (15610): No output dependent on input pin "SW[5]" File: C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/board_top.sv Line: 5
+Info (21057): Implemented 5259 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 9 input pins
+    Info (21059): Implemented 10 output pins
+    Info (21061): Implemented 5240 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 196 warnings
+    Info: Peak virtual memory: 4801 megabytes
+    Info: Processing ended: Fri Apr 12 04:33:45 2019
+    Info: Elapsed time: 00:00:36
+    Info: Total CPU time (on all processors): 00:01:02
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/Users/Tema/Desktop/semester_8/DIPLOMA/SchoolARM/REPOS/SchoolARM/boards/de10_lite/output_files/de10_lite.map.smsg.
+
+
