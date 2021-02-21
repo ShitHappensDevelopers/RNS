@@ -3,6 +3,7 @@
 #include <inttypes.h>
 #include <stdbool.h>
 #include <math.h>
+#include <malloc.h>
 
 
 
@@ -519,7 +520,7 @@ rns_t* apply_filter_rns(uint32_t filter_count, rns_t* filter, uint32_t signal_co
 
 void print_numbers(uint32_t count, uint32_t* numbers) {
 	for (int i = 0; i < count; i++) {
-		printf("Number is: %d\n", numbers[i]);
+		printf("%d\n", numbers[i]);
 	}
 	printf("\n");
 }
