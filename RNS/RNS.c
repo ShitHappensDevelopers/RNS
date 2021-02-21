@@ -34,7 +34,9 @@ typedef uint32_t rns_t;
 #define Modules_count 4
 int Modules[4] = { B0, B1, B2, B3 };
 
+
 rns_t Zero_rns = 0;
+rns_t Middle_number = 2105046900u;
 
 void reverse_rns(rns_t* numbers, int numbers_length) {
 	for (int i = 0; i < numbers_length / 2; i++)
@@ -285,6 +287,12 @@ uint32_t rns_maxint() {
 	return B0 * B1 * B2 * B3 - 1;
 }
 
+bool is_positive(rns_t number) {
+	return compare(number, Middle_number) <= 0;
+}
+
+
+
 //int ex(int x, int eps)
 //{
 //	int ret = 1, t = 1, f = 1;
@@ -500,27 +508,11 @@ uint32_t* apply_filter(uint32_t filter_count, uint32_t* filter, uint32_t signal_
 	return result;
 }
 
-rns_t* apply_filter_rns(uint32_t filter_count, rns_t* filter, uint32_t signal_count, rns_t* signal) {
-	rns_t* result = (rns_t*)malloc(sizeof(rns_t) * signal_count);
-
-	for (int i = 0; i < signal_count; i++) {
-		rns_t sum = 0;
-		for (int j = 0; j < filter_count; j++) {
-			if (i - j >= 0) {
-				rns_t temp = mul_rns_numbers(filter[j], signal[i - j]);
-				sum = add_rns_numbers(sum, temp);
-			}
-		}
-		result[i] = sum;
-	}
-
-	return result;
-}
-
 void print_numbers(uint32_t count, uint32_t* numbers) {
 	for (int i = 0; i < count; i++) {
-		printf("Number is: %d\n", numbers[i]);
+		printf(" %d, ", numbers[i]);
 	}
+	printf("\n");
 	printf("\n");
 }
 
@@ -540,46 +532,88 @@ bool check_arrays_equal(uint32_t count, uint32_t* arr1, uint32_t* arr2) {
 
 
 
+rns_t* apply_filter_rns(uint32_t filter_count, rns_t* filter, uint32_t signal_count, rns_t* signal) {
+	rns_t* result = (rns_t*)malloc(sizeof(rns_t) * signal_count);
+
+	for (int i = 0; i < signal_count; i++) {
+		rns_t sum = 0;
+		for (int j = 0; j < filter_count; j++) {
+			if (i - j >= 0) {
+				rns_t temp = mul_rns_numbers(filter[j], signal[i - j]);
+				sum = add_rns_numbers(sum, temp);
+			}
+		}
+		result[i] = sum;
+	}
+
+	return result;
+}
+
+
+
+
+
+
 
 
 int main()
 {
-	//printf("Hello World!\n");
-
-	//uint32_t i1 = 10;
-	//uint32_t i2 = 5;
-	//rns_t rns1 = int_to_rns(i1);
-	//rns_t rns2 = int_to_rns(i2);
-	//rns_t sum = mul_rns_numbers(rns1, rns2);
-	//uint32_t result = to_int(sum);
-
-	//printf("%" PRIu32 "\n", result);
+	/*rns_fp_t i = double_to_rns_fp(5.6);
+	rns_fp_t k = double_to_rns_fp(10.1);
+	rns_fp_t rns_fp_res = div_rns_fp_numbers(k, i);
+	double res_div = rns_fp_to_double(rns_fp_res);
+	rns_fp_res = mul_rns_fp_numbers(k, i);
+	double res_mul = rns_fp_to_double(rns_fp_res);
+	printf("division result : %f\n", res_div);
+	printf("multiplication result : %f\n", res_mul);*/
 
 
 
+	rns_t a1 = int_to_rns(28);
+	rns_t a2 = int_to_rns(93);
+	rns_t a1minusa2 = sub_rns_numbers(a1, a2);
+
+	bool a1pos = is_positive(a1);
+	bool a1m = is_positive(a1minusa2);
+
+	
 
 
 
-	////filter implementation
-	//uint32_t filter_count = 0;
-	//uint32_t* filter = read_file("filter.txt", &filter_count);
-	//rns_t* filter_rns = int_to_rns_arrays(filter_count, filter);
-	//print_numbers(filter_count, filter);
 
-	//uint32_t signal_count = 0;
-	//uint32_t* signal = read_file("signal.txt", &signal_count);
-	//rns_t* signal_rns = int_to_rns_arrays(signal_count, signal);
-	//print_numbers(signal_count, signal);
 
-	//uint32_t* result_signal = apply_filter(filter_count, filter, signal_count, signal);
-	//print_numbers(signal_count, result_signal);
-	//rns_t* result_signal_rns = apply_filter_rns(filter_count, filter_rns, signal_count, signal_rns);
-	//uint32_t* result_signal_rns_converted = rns_to_int_arrays(signal_count, result_signal_rns);
-	//print_numbers(signal_count, result_signal_rns_converted);
 
-	//bool are_equal = check_arrays_equal(signal_count, result_signal, result_signal_rns_converted);
-	//if (are_equal)
-	//	printf("ARE EQUAL!!!");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*uint32_t filter_count = 0;
+	uint32_t* filter = read_file("filter.txt", &filter_count);
+	rns_t* filter_rns = int_to_rns_arrays(filter_count, filter);
+	printf("Filter: ");
+	print_numbers(filter_count, filter);
+
+	uint32_t signal_count = 0;
+	uint32_t* signal = read_file("signal.txt", &signal_count);
+	rns_t* signal_rns = int_to_rns_arrays(signal_count, signal);
+	printf("Input signals: ");
+	print_numbers(signal_count, signal);
+
+	rns_t* result_signal_rns = apply_filter_rns(filter_count, filter_rns, signal_count, signal_rns);
+	uint32_t* result_signal_rns_converted = rns_to_int_arrays(signal_count, result_signal_rns);
+	printf("Output signals: ");
+	print_numbers(signal_count, result_signal_rns_converted);*/
 
 
 
@@ -629,12 +663,12 @@ int main()
 
 
 
-	rns_fp_t i = double_to_rns_fp(5.6);
-	rns_fp_t k = double_to_rns_fp(10.1);
-	rns_fp_t rns_fp_res = div_rns_fp_numbers(k, i);
-	double rns_fp_int_res = rns_fp_to_double(rns_fp_res);
-	rns_fp_t rns_fp_int_res2 = mul_rns_fp_numbers(k, i);
-	double rns_fp_int_res3 = rns_fp_to_double(rns_fp_int_res2);
+	//rns_fp_t i = double_to_rns_fp(5.6);
+	//rns_fp_t k = double_to_rns_fp(10.1);
+	//rns_fp_t rns_fp_res = div_rns_fp_numbers(k, i);
+	//double rns_fp_int_res = rns_fp_to_double(rns_fp_res);
+	//rns_fp_t rns_fp_int_res2 = mul_rns_fp_numbers(k, i);
+	//double rns_fp_int_res3 = rns_fp_to_double(rns_fp_int_res2);
 
 
 
