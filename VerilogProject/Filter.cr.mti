@@ -1,0 +1,28 @@
+D:/magister_4_semester/Diploma/VerilogProject/testbench.sv {1 {vlog -work work -sv -stats=none {D:\magister_4_semester\Diploma\VerilogProject\testbench.sv}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module testbench
+
+Top level modules:
+	testbench
+
+} {} {}} D:/magister_4_semester/Diploma/VerilogProject/fir_srg.v {1 {vlog -work work -stats=none D:/magister_4_semester/Diploma/VerilogProject/fir_srg.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module fir_srg
+
+Top level modules:
+	fir_srg
+
+} {} {}} D:/magister_4_semester/Diploma/VerilogProject/rns.sv {1 {vlog -work work -sv -stats=none D:/magister_4_semester/Diploma/VerilogProject/rns.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module rns_adder
+-- Compiling module rns_multiplier
+-- Compiling module convertor_int_to_rns
+-- Compiling module convertor_rns_to_int
+
+Top level modules:
+	rns_adder
+	rns_multiplier
+	convertor_int_to_rns
+	convertor_rns_to_int
+
+} {} {}}
