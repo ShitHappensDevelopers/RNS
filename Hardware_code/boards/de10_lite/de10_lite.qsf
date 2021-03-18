@@ -51,18 +51,6 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name SYSTEMVERILOG_FILE ../../src/sm_controller.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../../src/decoder.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../../src/mux2.sv
-set_global_assignment -name SYSTEMVERILOG_FILE board_top.sv
-set_global_assignment -name SYSTEMVERILOG_FILE sm_src.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../../src/sm_arm.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../../src/sm_clk_devider.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../../src/sm_datapath.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../../src/sm_memories.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../../src/sm_register_file.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../../src/sm_top.sv
-set_global_assignment -name SOURCE_FILE db/de10_lite.cmp.rdb
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_50 -entity DE10_Lite
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK2_50 -entity DE10_Lite
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_ADC_10 -entity DE10_Lite
@@ -357,4 +345,8 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_VS -entity DE10_
 set_location_assignment PIN_N5 -to ADC_CLK_10
 set_location_assignment PIN_P11 -to MAX10_CLK1_50
 set_location_assignment PIN_N14 -to MAX10_CLK2_50
+set_global_assignment -name SYSTEMVERILOG_FILE ../../src/filter/rns.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../src/filter/fir_srg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../src/filter/fir_rns.sv
+set_global_assignment -name SYSTEMVERILOG_FILE board_top.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -51,11 +51,11 @@ module convertor_rns_to_int #(parameter a0, parameter a1, parameter a2, paramete
     output [31:0]  int_number
 );
 
-reg [65:0] aa0 = 32'd3021585941;
-reg [65:0] aa1 = 32'd1099363434;
-reg [65:0] aa2 = 32'd1663315003;
-reg [65:0] aa3 = 32'd952860257;
-reg [65:0] s = 32'd3368562317;
+reg [42:0] aa0 = 32'd3021585941;
+reg [42:0] aa1 = 32'd1099363434;
+reg [42:0] aa2 = 32'd1663315003;
+reg [42:0] aa3 = 32'd952860257;
+reg [42:0] s = 32'd3368562317;
 
 
 assign int_number[31:0] = (aa0*rns[7:0] + aa1*rns[15:8] + aa2*rns[23:16] + aa3*rns[31:24]) % (s);
