@@ -15,13 +15,11 @@ module fir_rns (clk, reset, x, y);
   convertor_int_to_rns #(233,239,241,251) convertor_int_to_rns4(3, coef3);
   convertor_int_to_rns #(233,239,241,251) convertor_int_to_rns5(2, coef4);
   convertor_int_to_rns #(233,239,241,251) convertor_int_to_rns6(1, coef5);
-       
-  
+         
   function [31:0] add_rns (input  [31:0]  x1, x2);
     return {8'((x1[31:24] + x2[31:24]) % 251),8'((x1[23:16] + x2[23:16]) % 241),8'((x1[15:8] + x2[15:8]) % 239),8'((x1[7:0] + x2[7:0]) % 233)};
   endfunction
   
-
   function [31:0] mul_rns (input  [31:0]  x1, x2);
     return {8'((x1[31:24] * x2[31:24]) % 251),8'((x1[23:16] * x2[23:16]) % 241),8'((x1[15:8] * x2[15:8]) % 239),8'((x1[7:0] * x2[7:0]) % 233)};
   endfunction

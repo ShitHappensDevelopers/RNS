@@ -10,25 +10,17 @@ module fourier_srg #(n=100) (clk, reset, addr, x, operation, y_re, y_im, done);
   output reg [31:0] y_re;
   output reg [31:0] y_im;
   output reg        done;
-  reg    [31:0] LUT_re [n-1:0][n-1:0];
-  reg    [31:0] LUT_im [n-1:0][n-1:0];
+  logic    [31:0] LUT_re [n*n-1:0];
+  logic    [31:0] LUT_im [n*n-1:0];
   reg    [31:0] inputs  [n-1:0];
   reg    [31:0] outputs_re [n-1:0];
   reg    [31:0] outputs_im [n-1:0];
   reg    [31:0] i, j, acc_re, acc_im;
   
-  genvar k2, k3;
-  generate begin : a0
-    for (k2=0;k2<n;k2=k2+1) begin : a1
-      for (k3=0;k3<n;k3=k3+1) begin : a2
-        // wire A_re = $cos(-2 * `PI * k2 * k3 / n) * `SCALE;
-        // wire A_im = $sin(-2 * `PI * k2 * k3 / n) * `SCALE;
-        assign LUT_re[k2][k3] = $cos(-2 * `PI * k2 * k3 / n) * `SCALE;
-        assign LUT_im[k2][k3] = $sin(-2 * `PI * k2 * k3 / n) * `SCALE; 
-      end : a2
-    end : a1
-  end : a0
-  endgenerate
+  initial begin
+    $readmemb("tw_re.txt", LUT_re);
+    $readmemb("tw_im.txt", LUT_im);
+   end
   
   integer k;
   always @(posedge clk)
@@ -53,10 +45,8 @@ module fourier_srg #(n=100) (clk, reset, addr, x, operation, y_re, y_im, done);
         y_im <= outputs_im[addr];
     end
     else if (operation == 2'b10 && !done) begin
-        // acc_re <= acc_re + a0.a1[i].a2[j].A_re * inputs[j];
-        // acc_im <= acc_im + a0.a1[i].a2[j].A_im * inputs[j];
-        acc_re <= acc_re + LUT_re[i][j] * inputs[j];
-        acc_im <= acc_im + LUT_im[i][j] * inputs[j];
+        acc_re <= acc_re + LUT_re[i*n+j] * inputs[j];
+        acc_im <= acc_im + LUT_im[i*n+j] * inputs[j];
         
         if (i == n-1 && j == n) begin
             done <= 1;

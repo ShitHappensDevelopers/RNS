@@ -1,9 +1,11 @@
+#define _USE_MATH_DEFINES
 #include <stdint.h>
 #include <stdio.h>
 #include <inttypes.h>
 #include <stdbool.h>
 #include <math.h>
 #include <malloc.h>
+#include <stdlib.h>
 
 
 
@@ -31,6 +33,9 @@ typedef uint32_t rns_t;
 #define A1 1099363434u
 #define A2 1663315003u
 #define A3 952860257u
+
+#define IntRnsDelta 926404979u
+#define RnsMiddlePoint 1684281159u
 
 #define Modules_count 4
 int Modules[4] = { B0, B1, B2, B3 };
@@ -61,6 +66,8 @@ uint16_t get_rns_number_part(rns_t num, uint8_t base) {
 }
 
 rns_t int_to_rns(uint32_t n) {
+	if (n >= (1 << 31))
+		n = n - IntRnsDelta;
 	rns_t ans = 0;
 	ans |= (n % B0) << S0;
 	ans |= (n % B1) << S1;
@@ -83,7 +90,10 @@ uint32_t rns_to_int(rns_t n) {
 		(uint64_t)A1 * (uint64_t)get_rns_number_part(n, 1) +
 		(uint64_t)A2 * (uint64_t)get_rns_number_part(n, 2) +
 		(uint64_t)A3 * (uint64_t)get_rns_number_part(n, 3);
-	return (uint32_t)(ans % (rns_maxint() + 1u));
+	ans = (uint32_t)(ans % (rns_maxint() + 1u));
+	if (ans >= RnsMiddlePoint)
+		ans = ans + IntRnsDelta;
+	return ans;
 }
 
 uint32_t* rns_to_int_arrays(uint32_t count, rns_t* numbers) {
@@ -553,11 +563,68 @@ rns_t* apply_filter_rns(uint32_t filter_count, rns_t* filter, uint32_t signal_co
 
 
 
-
-
-
-int main()
+char* int32ToBinary(int n)
 {
+	char* result = (char*)malloc(sizeof(char) * 33);
+
+	for (int i = 0; i < 32; i++)
+		result[31 - i] = (n & (1 << i)) != 0 ? '1' : '0';
+	result[32] = NULL;
+
+	return result;
+}
+
+void generateTwiddleFactors(int signalsCount, int scaling, char* cos_file_name, char* sin_file_name, char* cos_file_name_rns, char* sin_file_name_rns) {
+	remove(cos_file_name);
+	remove(sin_file_name);
+	remove(cos_file_name_rns);
+	remove(sin_file_name_rns);
+
+	FILE* cosFile;
+	fopen_s(&cosFile, cos_file_name, "a");
+	FILE* sinFile;
+	fopen_s(&sinFile, sin_file_name, "a");
+	FILE* cosFileRns;
+	fopen_s(&cosFileRns, cos_file_name_rns, "a");
+	FILE* sinFileRns;
+	fopen_s(&sinFileRns, sin_file_name_rns, "a");
+
+	for (size_t i = 0; i < signalsCount; i++)
+	{
+		for (size_t j = 0; j < signalsCount; j++)
+		{
+			int32_t re = cos(-2 * M_PI * i * j / signalsCount) * (1 << scaling);
+			int32_t im = sin(-2 * M_PI * i * j / signalsCount) * (1 << scaling);
+
+			fprintf(cosFile, "%s\n", int32ToBinary(re));
+			fprintf(sinFile, "%s\n", int32ToBinary(im));
+			fprintf(cosFileRns, "%s\n", int32ToBinary((int32_t)int_to_rns((uint32_t)re)));
+			fprintf(sinFileRns, "%s\n", int32ToBinary((int32_t)int_to_rns((uint32_t)im)));
+		}
+	}
+
+	fclose(cosFile);
+	fclose(sinFile);
+	fclose(cosFileRns);
+	fclose(sinFileRns);
+}
+
+int main(int argc, char* argv[])
+{
+	//rns_t q = int_to_rns(-5);
+	//int q2 = rns_to_int(q);
+
+	int signalsCount = atoi(argv[1]);
+	int scaling = atoi(argv[2]);
+	char* cos_file_name = argv[3];
+	char* sin_file_name = argv[4];
+	char* sin_file_name_rns = argv[5];
+	char* cos_file_name_rns = argv[6];
+
+	generateTwiddleFactors(signalsCount, scaling, cos_file_name, sin_file_name, sin_file_name_rns, cos_file_name_rns);
+
+
+
 	/*rns_fp_t i = double_to_rns_fp(5.6);
 	rns_fp_t k = double_to_rns_fp(10.1);
 	rns_fp_t rns_fp_res = div_rns_fp_numbers(k, i);
@@ -569,12 +636,12 @@ int main()
 
 
 
-	rns_t a1 = int_to_rns(28);
-	rns_t a2 = int_to_rns(93);
-	rns_t a1minusa2 = sub_rns_numbers(a1, a2);
+	//rns_t a1 = int_to_rns(28);
+	//rns_t a2 = int_to_rns(93);
+	//rns_t a1minusa2 = sub_rns_numbers(a1, a2);
 
-	bool a1pos = is_positive(a1);
-	bool a1m = is_positive(a1minusa2);
+	//bool a1pos = is_positive(a1);
+	//bool a1m = is_positive(a1minusa2);
 
 
 

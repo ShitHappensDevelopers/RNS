@@ -31,18 +31,30 @@ module testbench();
     logic [31:0]  addr;
     logic [1:0 ]  operation;
     logic [31:0]  x_rns;
-    logic [31:0]  y_rns;
+    logic [31:0]  y_re_rns;
+    logic [31:0]  y_im_rns;
     logic         done;
-    
-
-    
-     //fourier_srg fir_srg
-     //(
-     //    .clk   ( clk     ),
-     //    .reset ( reset   ),
-     //    .x     ( x[31:0] ),
-     //    .y     ( y[31:0] )
-     //);
+       
+    logic [31:0] temp = 305;
+    logic [31:0] temp_rns;
+    logic [31:0] temp_rns_int;
+    convertor_int_to_rns #(233,239,241,251) convertor_int_to_rns2(temp, temp_rns);
+    convertor_rns_to_int #(233,239,241,251) convertor_rns_to_int_re2(temp_rns, temp_rns_int);
+       
+     // fourier_rns #(n) fourier_rns
+     // (
+         // .clk       ( clk       ),
+         // .reset     ( reset     ),
+         // .addr      ( addr      ),
+         // .x_rns     ( x_rns     ),
+         // .operation ( operation ),
+         // .y_re_rns  ( y_re_rns  ),
+         // .y_im_rns  ( y_im_rns  ),
+         // .done      ( done      )
+     // );
+     // convertor_int_to_rns #(233,239,241,251) convertor_int_to_rns(x, x_rns);
+     // convertor_rns_to_int #(233,239,241,251) convertor_rns_to_int_re(y_re_rns, y_re);
+     // convertor_rns_to_int #(233,239,241,251) convertor_rns_to_int_im(y_im_rns, y_im);
 	 
      fourier_srg #(n) fourier_srg
      (
@@ -55,8 +67,6 @@ module testbench();
          .y_im      ( y_im      ),
          .done      ( done      )
      );
-	 // convertor_int_to_rns #(233,239,241,251) convertor_int_to_rns(x, x_rns);
-     // convertor_rns_to_int #(233,239,241,251) convertor_rns_to_int(y_rns, y);
 
     // initialize test 
     initial 
