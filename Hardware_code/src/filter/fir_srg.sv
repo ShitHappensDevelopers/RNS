@@ -1,32 +1,56 @@
-module fir_srg (clk, reset, x, y);
+`include "common.sv"
 
-  input        clk;
-  input        reset;
-  input  [31:0] x;
-  output [31:0] y;
-  reg    [31:0] y;
-  reg    [31:0] tap0, tap1, tap2, tap3, tap4, tap5;
+module fir_srg #(n=100,signalLength=1000) (clk, reset, addr, x, operation, y, done);
+
+  input             clk;
+  input             reset;
+  input      [31:0] addr;
+  input      [31:0] x;
+  input      [1:0]  operation;
+  output reg [31:0] y;
+  output reg        done;
+  logic      [31:0] coefsLut [n-1:0];
+  reg        [31:0] inputs  [signalLength-1+n-1:0];
+  reg        [31:0] outputs [signalLength-1:0];
+  reg        [31:0] i; //calulationCounter;
+  reg        [31:0] j; //signalCounter;
+  reg        [31:0] acc;
   
-  always @(posedge clk)  // Behavioral Style
-  begin : p1
+  initial $readmemb("coefs.txt", coefsLut);
+  
+  integer k;
+  always @(posedge clk)
+  begin
     if (reset == 1) begin
-            tap0 <= 0;
-            tap1 <= 0;
-            tap2 <= 0;
-            tap3 <= 0;
-            tap4 <= 0;
-            tap5 <= 0;
+        i <= 0;
+        j <= 0;
+        acc <= 0;
+        done <= 0;
+        for (k=0; k<signalLength+n-1; k=k+1) begin
+            inputs[k] <= 0;
+            outputs[k] <= 0;
         end
-    else begin
-        y <= tap0 + tap1*2 + tap2*3 + tap3*3 + tap4*2 + tap5;
-
-        tap5 <= tap4;
-        tap4 <= tap3;
-        tap3 <= tap2;  // Tapped delay line: shift one 
-        tap2 <= tap1;
-        tap1 <= tap0;
-        tap0 <= x;   // Input in register 0
     end
+    if (operation == 2'b01)
+        inputs[addr+n-1] <= x;
+        
+    else if (operation == 2'b10 && !done) begin
+        if (j == signalLength)
+            done <= 1;
+        else if (i == n) begin
+            outputs[j] <= acc;
+            acc <= 0;
+            j <= j+1;
+            i <= 0;
+        end 
+        else begin
+            acc <= acc + inputs[i+j] * coefsLut[n-i-1];
+            i <= i+1;
+        end
+    end
+    
+    else if (operation == 2'b11)
+        y <= outputs[addr];
   end
 
 endmodule

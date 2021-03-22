@@ -37,17 +37,10 @@ module fourier_srg #(n=100) (clk, reset, addr, x, operation, y_re, y_im, done);
             outputs_im[k] <= 0;
         end
     end
-    if (operation == 2'b01) begin
+    if (operation == 2'b01)
         inputs[addr] <= x;
-    end
-    else if (operation == 2'b11) begin
-        y_re <= outputs_re[addr];
-        y_im <= outputs_im[addr];
-    end
+    
     else if (operation == 2'b10 && !done) begin
-        acc_re <= acc_re + LUT_re[i*n+j] * inputs[j];
-        acc_im <= acc_im + LUT_im[i*n+j] * inputs[j];
-        
         if (i == n-1 && j == n) begin
             done <= 1;
         end       
@@ -60,8 +53,15 @@ module fourier_srg #(n=100) (clk, reset, addr, x, operation, y_re, y_im, done);
             i <= i+1;
         end
         else begin
+            acc_re <= acc_re + LUT_re[i*n+j] * inputs[j];
+            acc_im <= acc_im + LUT_im[i*n+j] * inputs[j];
             j <= j+1;
         end
+    end
+    
+    else if (operation == 2'b11) begin
+        y_re <= outputs_re[addr];
+        y_im <= outputs_im[addr];
     end
   end
 

@@ -480,7 +480,7 @@ rns_fp_t sqrt_rns_fp(rns_fp_t number) {
 
 
 
-uint32_t* read_file(char* file_name, uint32_t* count)
+int32_t* read_file(char* file_name, int32_t* count)
 {
 	FILE* myFile;
 	errno_t err = fopen_s(&myFile, file_name, "r");
@@ -492,7 +492,7 @@ uint32_t* read_file(char* file_name, uint32_t* count)
 
 	fscanf_s(myFile, "%d,", count);
 
-	uint32_t* array = (uint32_t*)malloc(sizeof(uint32_t) * (*count));
+	int32_t* array = (int32_t*)malloc(sizeof(int32_t) * (*count));
 
 	for (int i = 0; i < *count; i++) {
 		fscanf_s(myFile, "%d,", &array[i]);
@@ -574,6 +574,28 @@ char* int32ToBinary(int n)
 	return result;
 }
 
+void generatefilterCoefficients(char* coefs_input_file_name, char* coefs_file_name, char* coefs_file_name_rns) {
+	remove(coefs_file_name);
+	remove(coefs_file_name_rns);
+
+	int32_t coefsCount = 0;
+	int32_t* coefs = read_file(coefs_input_file_name, &coefsCount);
+
+	FILE* coefs_file;
+	fopen_s(&coefs_file, coefs_file_name, "a");
+	FILE* coefs_file_rns;
+	fopen_s(&coefs_file_rns, coefs_file_name_rns, "a");
+
+	for (size_t j = 0; j < coefsCount; j++)
+	{
+		fprintf(coefs_file, "%s\n", int32ToBinary(coefs[j]));
+		fprintf(coefs_file_rns, "%s\n", int32ToBinary((int32_t)int_to_rns((uint32_t)coefs[j])));
+	}
+
+	fclose(coefs_file);
+	fclose(coefs_file_rns);
+}
+
 void generateTwiddleFactors(int signalsCount, int scaling, char* cos_file_name, char* sin_file_name, char* cos_file_name_rns, char* sin_file_name_rns) {
 	remove(cos_file_name);
 	remove(sin_file_name);
@@ -614,16 +636,24 @@ int main(int argc, char* argv[])
 	//rns_t q = int_to_rns(-5);
 	//int q2 = rns_to_int(q);
 
-	int signalsCount = atoi(argv[1]);
+	/*int signalsCount = atoi(argv[1]);
 	int scaling = atoi(argv[2]);
 	char* cos_file_name = argv[3];
 	char* sin_file_name = argv[4];
 	char* sin_file_name_rns = argv[5];
 	char* cos_file_name_rns = argv[6];
 
-	generateTwiddleFactors(signalsCount, scaling, cos_file_name, sin_file_name, sin_file_name_rns, cos_file_name_rns);
+	generateTwiddleFactors(signalsCount, scaling, cos_file_name, sin_file_name, sin_file_name_rns, cos_file_name_rns);*/
 
 
+	/*int32_t* signalsCount=0;
+	int32_t* signals = read_file("filter.txt", &signalsCount);
+	print_numbers(6, signals);*/
+
+	char* coefs_input_file_name = argv[1];
+	char* coefs_file_name = argv[2];
+	char* coefs_file_name_rns = argv[3];
+	generatefilterCoefficients(coefs_input_file_name, coefs_file_name, coefs_file_name_rns);
 
 	/*rns_fp_t i = double_to_rns_fp(5.6);
 	rns_fp_t k = double_to_rns_fp(10.1);
