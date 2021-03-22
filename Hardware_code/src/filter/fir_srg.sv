@@ -26,10 +26,10 @@ module fir_srg #(n=100,signalLength=1000) (clk, reset, addr, x, operation, y, do
         j <= 0;
         acc <= 0;
         done <= 0;
-        for (k=0; k<signalLength+n-1; k=k+1) begin
+        for (k=0; k<signalLength+n-1; k=k+1)
             inputs[k] <= 0;
+        for (k=0; k<signalLength; k=k+1)
             outputs[k] <= 0;
-        end
     end
     if (operation == 2'b01)
         inputs[addr+n-1] <= x;
