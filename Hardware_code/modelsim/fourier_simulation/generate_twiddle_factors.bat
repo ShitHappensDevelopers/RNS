@@ -1,1 +1,1 @@
-RNS.exe 10 10 tw_re.txt tw_im.txt tw_re_rns.txt tw_im_rns.txt
+RNS_tw.exe 10 10 tw_re.txt tw_im.txt tw_re_rns.txt tw_im_rns.txt

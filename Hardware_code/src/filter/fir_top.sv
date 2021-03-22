@@ -9,7 +9,7 @@ module fir_top(clk, reset, regAddr, regData, done);
   output [31:0] regData;
   output        done;
   
-    int           signal[0:9];  
+    reg   [31:0]  signal[0:9];  
     logic [31:0]  x;
     logic [31:0]  y;
     logic [31:0]  addr;
@@ -44,10 +44,7 @@ module fir_top(clk, reset, regAddr, regData, done);
          .done      ( done    )
      );
 	
-    initial 
-        begin 
-            signal = '{0,1,2,3,4,5,6,7,8,9};          
-        end
+    initial $readmemb("signal.txt", signal);
         
     always @(posedge clk)
         begin

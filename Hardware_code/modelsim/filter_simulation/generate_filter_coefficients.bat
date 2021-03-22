@@ -1,1 +1,1 @@
-RNS.exe input.txt coefs.txt coefs_rns.txt
+RNS.exe input_coefs.txt coefs.txt coefs_rns.txt
