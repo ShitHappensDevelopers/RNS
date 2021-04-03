@@ -12,13 +12,19 @@ module testbench();
     wire [ 31:0 ] regData; 
     logic         done; 
     
-    fourier_top fourier_top (
-        .clk     ( clk ),
-        .reset   ( reset ),
-        .regAddr ( regAddr ),
-        .regData ( regData ),
-        .done    ( done )
-    );     
+    // fourier_top fourier_top (
+    //     .clk     ( clk ),
+    //     .reset   ( reset ),
+    //     .regAddr ( regAddr ),
+    //     .regData ( regData ),
+    //     .done    ( done )
+    // );     
+
+    reg[63:0] a = -64'd65966565776878;
+    reg[64:0] b;
+    reg[63:0] c;
+    convertor_int_to_rns_64 convertor_int_to_rns_64(a,b);
+    convertor_rns_to_int_64 convertor_rns_to_int_64(b,c);
     
     initial 
         begin 
