@@ -22,7 +22,7 @@ module board_top(
     wire          rst_n     =  ~KEY[0];
     wire          clkEnable =  SW [0];
     wire [  3:0 ] clkDevide =  4'b0110;
-    wire [  4:0 ] regAddr   =  SW [16:1];
+    wire [ 15:0 ] regAddr   =  SW [16:1];
     wire [ 17:0 ] regData;
     
     fir_top fir_top (

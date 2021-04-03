@@ -1,7 +1,7 @@
 `timescale 1 ns / 100 ps
 
 `ifndef SIMULATION_CYCLES
-    `define SIMULATION_CYCLES 300
+    `define SIMULATION_CYCLES 3000
 `endif
 
 module testbench(); 

@@ -1,1 +1,1 @@
-RNS.exe input_signal.txt signal.txt signal_rns.txt
+filter_input_data_generator.exe input_signal.txt signal.txt signal_rns.txt

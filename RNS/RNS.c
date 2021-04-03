@@ -53,8 +53,8 @@ void reverse_rns(rns_t* numbers, int numbers_length) {
 	}
 }
 
-uint16_t get_rns_number_part(rns_t num, uint8_t base) {
-	uint16_t ans = 0;
+uint8_t get_rns_number_part(rns_t num, uint8_t base) {
+	uint8_t ans = 0;
 	switch (base) {
 	case 0: ans = (uint16_t)((num & M0) >> S0); break;
 	case 1: ans = (uint16_t)((num & M1) >> S1); break;

@@ -1,21 +1,20 @@
 `include "common.sv"
 
 module fourier_srg #(n=100) (clk, reset, addr, x, operation, y_re, y_im, done);
-
-  input         clk;
-  input         reset;
-  input  [31:0] addr;
-  input  [31:0] x;
-  input  [1:0]  operation;
+  input             clk;
+  input             reset;
+  input      [31:0] addr;
+  input      [31:0] x;
+  input      [1:0 ] operation;
   output reg [31:0] y_re;
   output reg [31:0] y_im;
   output reg        done;
-  logic    [31:0] LUT_re [n*n-1:0];
-  logic    [31:0] LUT_im [n*n-1:0];
-  reg    [31:0] inputs  [n-1:0];
-  reg    [31:0] outputs_re [n-1:0];
-  reg    [31:0] outputs_im [n-1:0];
-  reg    [31:0] i, j, acc_re, acc_im;
+  logic      [31:0] LUT_re [n*n-1:0];
+  logic      [31:0] LUT_im [n*n-1:0];
+  reg        [31:0] inputs [n-1:0];
+  reg        [31:0] outputs_re [n-1:0];
+  reg        [31:0] outputs_im [n-1:0];
+  reg        [31:0] i, j, acc_re, acc_im;
   
   initial begin
     $readmemb("tw_re.txt", LUT_re);
