@@ -12,7 +12,7 @@ module testbench();
     wire [ 31:0 ] regData; 
     logic         done; 
     
-    fourier_top fourier_top (
+    fourier_top_64 fourier_top_64 (
         .clk     ( clk ),
         .reset   ( reset ),
         .regAddr ( regAddr ),

@@ -25,13 +25,21 @@ module board_top(
     wire [  4:0 ] regAddr   =  SW [16:1];
     wire [ 17:0 ] regData;
     
-    fourier_top fourier_top (
-        .clk     ( clkIn         ),
-        .reset   ( rst_n         ),
-        .regAddr ( regAddr       ),
-        .regData ( regData[17:1] ),
-        .done    ( regData[0]    )
-    );   
+    // fourier_top fourier_top (
+    //     .clk     ( clkIn         ),
+    //     .reset   ( rst_n         ),
+    //     .regAddr ( regAddr       ),
+    //     .regData ( regData[17:1] ),
+    //     .done    ( regData[0]    )
+    // );   
+    reg[63:0] a = 10;
+    reg[64:0] b;
+    reg[63:0] c;
+    //convertor_int_to_rns_64 convertor_int_to_rns_64(a,b);
+    //convertor_rns_to_int_64 convertor_rns_to_int_64(b,c);
+
+    convertor_int_to_rns_64 convertor_int_to_rns_642(regAddr,b);
+    convertor_rns_to_int_64 convertor_rns_to_int_642(b,regData);
     
 	assign LEDR[17:0] = regData[17:0];
 	

@@ -1,4 +1,4 @@
-module fourier_top(clk, reset, regAddr, regData, done);
+module fourier_top_64(clk, reset, regAddr, regData, done);
 
   parameter n = 10;
     
@@ -8,20 +8,20 @@ module fourier_top(clk, reset, regAddr, regData, done);
   output [31:0] regData;
   output        done;
   
-    reg   [31:0]  signal[0:9];  
-    logic [31:0]  x;
-    logic [31:0]  y_re;
-    logic [31:0]  y_im;
+    reg   [63:0]  signal[0:9];  
+    logic [63:0]  x;
+    logic [63:0]  y_re;
+    logic [63:0]  y_im;
     logic [31:0]  addr;
     logic [1:0 ]  operation;
     
-    logic [31:0]  x_rns;
-    logic [31:0]  y_re_rns;
-    logic [31:0]  y_im_rns;
+    logic [64:0]  x_rns;
+    logic [64:0]  y_re_rns;
+    logic [64:0]  y_im_rns;
 	 
      assign regData = y_re;
      
-     fourier_rns #(n) fourier_rns
+     fourier_rns_64 #(n) fourier_rns_64
      (
          .clk       ( clk       ),
          .reset     ( reset     ),
@@ -32,23 +32,38 @@ module fourier_top(clk, reset, regAddr, regData, done);
          .y_im_rns  ( y_im_rns  ),
          .done      ( done      )
      );
-	 convertor_int_to_rns #(233,239,241,251) convertor_int_to_rns(x, x_rns);
-     convertor_rns_to_int #(233,239,241,251) convertor_rns_to_int_re(y_re_rns, y_re);
-     convertor_rns_to_int #(233,239,241,251) convertor_rns_to_int_im(y_im_rns, y_im);
+    convertor_int_to_rns_64 convertor_int_to_rns_64(x, x_rns);
+     convertor_rns_to_int_64 convertor_rns_to_int_re_64(y_re_rns, y_re);
+     convertor_rns_to_int_64 convertor_rns_to_int_im_64(y_im_rns, y_im);
 
-     // fourier_srg #(n) fourier_srg
-     // (
-         // .clk       ( clk       ),
-         // .reset     ( reset     ),
-         // .addr      ( addr      ),
-         // .x         ( x         ),
-         // .operation ( operation ),
-         // .y_re      ( y_re      ),
-         // .y_im      ( y_im      ),
-         // .done      ( done      )
-     // );
-	
-    initial $readmemb("signal.txt", signal);
+    // reg [63:0] a = 64'd100;
+    // reg [63:0] b = -64'd200;
+    // reg [63:0] c;
+    // reg [64:0] a_rns;
+    // reg [64:0] b_rns;
+    // reg [64:0] c_rns;
+
+
+	//  convertor_int_to_rns_64 convertor_int_to_rns_64_a(a, a_rns);
+	//  convertor_int_to_rns_64 convertor_int_to_rns_64_b(b, b_rns);
+    //  convertor_rns_to_int_64 convertor_rns_to_int_re_64(c_rns, c);
+
+    //mul_rns_64 add_rns_64(a_rns, b_rns, c_rns);
+
+    //initial $readmemb("output_signal_rns.txt", signal);
+
+    //  fourier_srg_64 #(n) fourier_srg_64
+    //  (
+    //      .clk       ( clk       ),
+    //      .reset     ( reset     ),
+    //      .addr      ( addr      ),
+    //      .x         ( x         ),
+    //      .operation ( operation ),
+    //      .y_re      ( y_re      ),
+    //      .y_im      ( y_im      ),
+    //      .done      ( done      )
+    //  );	
+    initial $readmemb("output_signal.txt", signal);
         
     always @(posedge clk)
         begin

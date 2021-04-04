@@ -34,6 +34,9 @@ module board_top(
     );   
     
 	assign LEDR[17:0] = regData[17:0];
+    
+    reg [65:0] test; /* synthesis keep */
+    assign test = 66'b010101010101010101010101010101010101010101010101010101010101010101 % 66'b110101010101010101010101010101010101010101010101010101010101010101; /* synthesis keep */
 	
 	//wire [ 31:0 ] h7segment = numberHex;
 	

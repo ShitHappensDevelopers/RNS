@@ -41,6 +41,61 @@ typedef uint32_t rns_t;
 int Modules[4] = { B0, B1, B2, B3 };
 
 
+#define B0_64 2
+#define B1_64 211
+#define B2_64 223
+#define B3_64 227
+#define B4_64 229
+#define B5_64 233
+#define B6_64 239
+#define B7_64 241
+#define B8_64 251
+
+#define M0_64 0x1
+#define M1_64 0x1FE
+#define M2_64 0x1FE00
+#define M3_64 0x1FE0000
+#define M4_64 0x1FE000000
+#define M5_64 0x1FE00000000
+#define M6_64 0x1FE0000000000
+#define M7_64 0x1FE000000000000
+#define M8_64 0x1FE00000000000000
+
+#define S0_64 0
+#define S1_64 1
+#define S2_64 9
+#define S3_64 17
+#define S4_64 25
+#define S5_64 33
+#define S6_64 41
+#define S7_64 49
+#define S8_64 57
+
+#define A0_64 8239355544127721383u
+#define A1_64 2811533645389554216u
+#define A2_64 12636141686509778982u
+#define A3_64 3702265486788667758u
+#define A4_64 7483781454928236016u
+#define A5_64 636516737314587918u
+#define A6_64 6412218122208184842u
+#define A7_64 752140340127841786u
+#define A8_64 6762180247371755398u
+
+#define IntRnsDelta_64 1968032985454108850u
+#define RnsMiddlePoint_64 8239355544127721383u
+
+#define Modules_count_64 9
+int Modules_64[9] = { B0_64,
+					  B1_64,
+					  B2_64, 
+					  B3_64, 
+					  B4_64, 
+					  B5_64, 
+					  B6_64, 
+					  B7_64, 
+					  B8_64 };
+
+
 rns_t Zero_rns = 0;
 rns_t Middle_number = 2105046900u;
 
@@ -574,6 +629,17 @@ char* int32ToBinary(int n)
 	return result;
 }
 
+char* int64ToBinary(uint64_t n)
+{
+	char* result = (char*)malloc(sizeof(char) * 65);
+
+	for (int i = 0; i < 64; i++)
+		result[63 - i] = (n & ((uint64_t)1 << i)) != 0 ? '1' : '0';
+	result[64] = NULL;
+
+	return result;
+}
+
 void generatefilterCoefficients(char* coefs_input_file_name, char* coefs_file_name, char* coefs_file_name_rns) {
 	remove(coefs_file_name);
 	remove(coefs_file_name_rns);
@@ -596,7 +662,7 @@ void generatefilterCoefficients(char* coefs_input_file_name, char* coefs_file_na
 	fclose(coefs_file_rns);
 }
 
-void generateTwiddleFactors(int signalsCount, int scaling, char* cos_file_name, char* sin_file_name, char* cos_file_name_rns, char* sin_file_name_rns) {
+void generateTwiddleFactors_32(int signalsCount, int scaling, char* cos_file_name, char* sin_file_name, char* cos_file_name_rns, char* sin_file_name_rns) {
 	remove(cos_file_name);
 	remove(sin_file_name);
 	remove(cos_file_name_rns);
@@ -633,6 +699,11 @@ void generateTwiddleFactors(int signalsCount, int scaling, char* cos_file_name, 
 
 int main(int argc, char* argv[])
 {
+#ifdef __SIZEOF_INT128__
+	printf("supported");
+#else
+	printf("NOT supported");
+#endif
 	//rns_t q = int_to_rns(-5);
 	//int q2 = rns_to_int(q);
 
@@ -650,10 +721,10 @@ int main(int argc, char* argv[])
 	int32_t* signals = read_file("filter.txt", &signalsCount);
 	print_numbers(6, signals);*/
 
-	char* coefs_input_file_name = argv[1];
+	/*char* coefs_input_file_name = argv[1];
 	char* coefs_file_name = argv[2];
 	char* coefs_file_name_rns = argv[3];
-	generatefilterCoefficients(coefs_input_file_name, coefs_file_name, coefs_file_name_rns);
+	generatefilterCoefficients(coefs_input_file_name, coefs_file_name, coefs_file_name_rns);*/
 
 	/*rns_fp_t i = double_to_rns_fp(5.6);
 	rns_fp_t k = double_to_rns_fp(10.1);

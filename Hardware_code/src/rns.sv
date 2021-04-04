@@ -1,34 +1,34 @@
 `include "common.sv"
 
-module add_rns #(parameter b0, parameter b1, parameter b2, parameter b3)
-(
-    input  [31:0]  x1,
-    input  [31:0]  x2,
-    output [31:0]  y
-);
+// module add_rns #(parameter b0, parameter b1, parameter b2, parameter b3)
+// (
+//     input  [31:0]  x1,
+//     input  [31:0]  x2,
+//     output [31:0]  y
+// );
 
-assign y[7:0] = (x1[7:0] + x2[7:0]) % b0;
-assign y[15:8] = (x1[15:8] + x2[15:8]) % b1;
-assign y[23:16] = (x1[23:16] + x2[23:16]) % b2;
-assign y[31:24] = (x1[31:24] + x2[31:24]) % b3;
+// assign y[7:0] = (x1[7:0] + x2[7:0]) % b0;
+// assign y[15:8] = (x1[15:8] + x2[15:8]) % b1;
+// assign y[23:16] = (x1[23:16] + x2[23:16]) % b2;
+// assign y[31:24] = (x1[31:24] + x2[31:24]) % b3;
     
-endmodule
+// endmodule
 
 
 
-module mul_rns #(parameter b0, parameter b1, parameter b2, parameter b3)
-(
-    input  [31:0]  x1,
-    input  [31:0]  x2,
-    output [31:0]  y
-);
+// module mul_rns #(parameter b0, parameter b1, parameter b2, parameter b3)
+// (
+//     input  [31:0]  x1,
+//     input  [31:0]  x2,
+//     output [31:0]  y
+// );
 
-assign y[7:0] = (x1[7:0] * x2[7:0]) % b0;
-assign y[15:8] = (x1[15:8] * x2[15:8]) % b1;
-assign y[23:16] = (x1[23:16] * x2[23:16]) % b2;
-assign y[31:24] = (x1[31:24] * x2[31:24]) % b3;
+// assign y[7:0] = (x1[7:0] * x2[7:0]) % b0;
+// assign y[15:8] = (x1[15:8] * x2[15:8]) % b1;
+// assign y[23:16] = (x1[23:16] * x2[23:16]) % b2;
+// assign y[31:24] = (x1[31:24] * x2[31:24]) % b3;
     
-endmodule
+// endmodule
 
 
 

@@ -1,0 +1,1 @@
+RNS_different.exe input.txt output.txt 10
